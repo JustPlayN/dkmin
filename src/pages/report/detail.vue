@@ -6,33 +6,41 @@
       <div class="nav-item" :class="{'border-b': navStatus === 1}" @click="navStatus = 1">单项分析</div>
       <div class="nav-item" :class="{'border-b': navStatus === 2}" @click="navStatus = 2">方案建议</div>
     </div>
-    <total-analyse v-if="navStatus === 0"  />
-    <single-analyse v-if="navStatus === 1" />
+    <div class="item-box">
+      <total-analyse v-if="navStatus === 0"  />
+      <single-analyse v-if="navStatus === 1" />
+      <suggestion v-if="navStatus === 2" />
+    </div>
   </div>
 </template>
-
+<config>
+{
+  usingComponents: {
+    'ec-canvas': '../../native/ec-canvas/ec-canvas'
+  }
+}
+</config>
 <script>
 import ChartCircle from '@/components/ChartCircle'
 import TotalAnalyse from './components/TotalAnalyse'
 import SingleAnalyse from './components/SingleAnalyse'
+import Suggestion from './components/Suggestion'
 export default {
   components: {
     ChartCircle,
     TotalAnalyse,
-    SingleAnalyse
+    SingleAnalyse,
+    Suggestion
   },
   data () {
     return {
-      navStatus: 0
+      navStatus: 2
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-.detail {
-  padding-bottom: 80rpx;
-}
 .nav {
   display: flex;
   align-items: stretch;
@@ -54,5 +62,9 @@ export default {
       }
     }
   }
+}
+.item-box {
+  min-height: 100vh;
+  padding-bottom: 40rpx;
 }
 </style>

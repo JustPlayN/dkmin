@@ -1,0 +1,179 @@
+<template>
+  <div class="anaylse-item">
+    <div class="top" @click="heightChange" :class="{'border-b': showInfo}">
+      <img class="icon" src="@/native/img/sg.png" />
+      <div class="name">身高<text class="desc">（走拼横木）</text></div>
+      <div class="average">平均121cm</div>
+      <div class="tag">优秀</div>
+      <text class="iconfont iconright" />
+    </div>
+    <div class="bottom" :style="{height: `${height}px`}">
+      <div class="content" id="content">
+        <div class="progress-box">
+          <div class="p-desc">
+            全班合格人数<text class="red">3人</text>，
+            合格率<text class="red">30%</text>
+          </div>
+          <div class="process">
+            <div class="processer" :style="{width: `300rpx`}" />
+          </div>
+        </div>
+        <!-- <div class="sg-chart-box">
+          <sg-chart v-if="showInfo" />
+        </div> -->
+        <div class="desc">反映幼儿上肢和腰腹肌肉力量，是影响幼儿体育活动的重要因素上肢力量良好，将来有成为大力水手的潜质！</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import SgChart from '@/components/SgChart'
+export default {
+  components: {
+    SgChart
+  },
+  data () {
+    return {
+      showInfo: false,
+      height: 0,
+      query: null
+    }
+  },
+  methods: {
+    heightChange () {
+      this.showInfo = !this.showInfo
+      if (this.showInfo) {
+        let _this = this
+        if (_this.query) {
+          _this.query.exec(function (res) {
+            _this.height = res[0].height
+          })
+        } else {
+          _this.query = Megalo.createSelectorQuery()
+          _this.query.select('#content').boundingClientRect()
+          _this.query.exec(function (res) {
+            _this.height = res[0].height
+          })
+        }
+      } else {
+        this.height = 0
+      }
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.anaylse-item {
+  margin: 0 32rpx 24rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 24rpx 0 rgba(49,191,255,0.1);
+  border-radius: 24rpx;
+  .top {
+    display: flex;
+    align-items: center;
+    height: 108rpx;
+    margin: 0 32rpx;
+    .icon {
+      width: 48rpx;
+      height: 48rpx;
+      margin-right: 16rpx;
+    }
+    .name {
+      flex-grow: 1;
+      font-size: 32rpx;
+      line-height: 44rpx;
+      font-weight: bold;
+    }
+    .desc {
+      font-size: 24rpx;
+    }
+    .average {
+      margin-right: 16rpx;
+      font-size: 28rpx;
+      line-height: 40rpx;
+      color: #17AFF3;
+    }
+    .tag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32rpx;
+      padding: 0 16rpx;
+      color: #fff;
+      border-radius: 6rpx;
+      background: #38A8FF;
+      &.good {
+        background: #0DE18C;
+      }
+      &.bad {
+        background: #FF6889;
+      }
+      &.pass {
+        background: rgba(255, 191, 11, 1);
+      }
+    }
+    .iconfont {
+      font-size: 24rpx;
+      color: #C2C6D1;
+    }
+  }
+  .bottom {
+    height: 0;
+    overflow: hidden;
+    transition: height .4s;
+    .content {
+      padding: 0 32rpx 32rpx;
+    }
+    .progress-box {
+      padding-top: 32rpx;
+      .p-desc {
+        font-size: 28rpx;
+        line-height: 40rpx;
+      }
+      .red {
+        color: #FF3E6D;
+      }
+      .process {
+        height: 32rpx;
+        margin-top: 16rpx;
+        background: rgba(59, 131, 165, .3);
+        border-radius: 16rpx;
+        position: relative;
+        .processer {
+          height: 32rpx;
+          background: #31BFFF;
+          border-radius: 16rpx;
+        }
+        &.good {
+          background: rgba(13, 225, 140, .3);
+          .processer {
+            background: rgba(13, 225, 140, 1);
+          }
+        }
+        &.bad {
+          background: rgba(255, 104, 137, .3);
+          .processer {
+            background: rgba(255, 104, 137, 1);
+          }
+        }
+        &.pass {
+          background: rgba(255, 191, 11, .3);
+          .processer {
+            background: rgba(255, 191, 11, 1);
+          }
+        }
+      }
+    }
+    .desc {
+      margin-top: 48rpx;
+      font-size: 28rpx;
+      line-height: 40rpx;
+    }
+    .sg-chart-box {
+      height: 488rpx;
+    }
+  }
+}
+</style>

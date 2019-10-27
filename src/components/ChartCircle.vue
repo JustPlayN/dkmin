@@ -16,18 +16,12 @@
       <text class="msg-desc">小三班</text>
     </div>
     <div class="echart-box">
-      <my-echarts :echarts="echarts" :onInit="onInit" canvasId="circle-canvas" />
+      <ec-canvas canvas-id="circle-canvas" :ec="ec" />
     </div>
   </div>
 </template>
-
 <script>
-import echarts from '@/native/js/echarts'
-// import echarts from 'echarts'
-import myEcharts from './myChart/echarts'
-
-let chart = null
-let option = {
+let cirleOption = {
   tooltip: {
     trigger: 'item',
     formatter: '{b}: {c} ({d}%)'
@@ -71,28 +65,15 @@ let option = {
     }
   ]
 }
-function initChart (canvas, width, height) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  })
-  canvas.setChart(chart)
-  chart.setOption(option)
-
-  return chart // 返回 chart 后可以自动绑定触摸操作
-}
 
 export default {
-  components: {
-    myEcharts
-  },
   data () {
     return {
-      echarts,
-      onInit: initChart
+      ec: {}
     }
   },
   created () {
+    this.ec.options = cirleOption
   }
 }
 </script>

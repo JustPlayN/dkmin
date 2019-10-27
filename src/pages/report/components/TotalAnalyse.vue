@@ -1,7 +1,7 @@
 <template>
   <div class="total-analyse">
     <div class="echart-box">
-      <my-echarts :echarts="echarts" :onInit="onInit" canvasId="analyse-canvas" throttleTouch />
+      <ec-canvas canvas-id="total-analyse" :ec="ec" />
     </div>
     <div class="desc">本班身高平均得分3.5分，体重平均得分4, 本班身高平均得分3.5分，体重平均得分4</div>
     <div class="tips">
@@ -12,16 +12,10 @@
 </template>
 
 <script>
-import echarts from '@/native/js/echarts'
-// import echarts from 'echarts'
-import myEcharts from '@/components/myChart/echarts'
-
-let chart = null
-let option = {
+let analyseOption = {
   tooltip: {
     position: ['20', '60'],
     formatter: (val) => {
-      console.log(val)
       let arr = ['身高', '灵敏', '柔韧', '下肢', '上肢', '协调', '平衡', '体重']
       let str = val.data.value.map((item, index) => {
         return `${arr[index]}平均：${item}`
@@ -71,35 +65,15 @@ let option = {
   }],
   color: ['#FF6889', '#31BFFF'],
 }
-function initChart (canvas, width, height) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  })
-  canvas.setChart(chart)
-  chart.setOption(option)
-
-  return chart // 返回 chart 后可以自动绑定触摸操作
-}
 
 export default {
-  components: {
-    myEcharts
-  },
   data () {
     return {
-      echarts,
-      chart,
-      onInit: null
+      ec: {}
     }
   },
   created () {
-    console.log(this.chart)
-    if (this.chart) {
-      this.chart.resize()
-    } else {
-      this.onInit = initChart
-    }
+    this.ec.options = analyseOption
   }
 }
 </script>
