@@ -1,5 +1,5 @@
 <template>
-  <div class="detail">
+  <div class="personal-detail">
     <chart-circle />
     <div class="nav border-b">
       <div class="nav-item" :class="{'border-b': navStatus === 0}" @click="navStatus = 0">概况分析</div>
@@ -22,9 +22,9 @@
 </config>
 <script>
 import ChartCircle from '@/components/ChartCircle'
-import TotalAnalyse from './components/campus/TotalAnalyse'
-import SingleAnalyse from './components/campus/SingleAnalyse'
-import Suggestion from './components/campus/Suggestion'
+import TotalAnalyse from './components/personal/TotalAnalyse'
+import SingleAnalyse from './components/personal/SingleAnalyse'
+import Suggestion from './components/personal/Suggestion'
 export default {
   components: {
     ChartCircle,
@@ -34,7 +34,7 @@ export default {
   },
   data () {
     return {
-      navStatus: 2
+      navStatus: 1
     }
   }
 }

@@ -21,14 +21,16 @@ export default {
   config: {
     // pages 的首个页面会被编译成首页
     pages: [
-      'pages/bind/type',            // 绑定方式
-      'pages/bind/index',           // 绑定
-      'pages/mine/index',           // 我的
-      'pages/mine/password',        // 密码
-      'pages/score/list',           // 我的
-      'pages/report/detail',        // 报告详情
-      'pages/report/index',         // 报告
-      'pages/index/index',          // 首页
+      'pages/report/personalDetail',        // 家长--个人详情
+      'pages/report/history',               // 家长--历史
+      'pages/bind/type',                    // 绑定方式
+      'pages/bind/index',                   // 绑定
+      'pages/mine/index',                   // 我的
+      'pages/mine/password',                // 密码
+      'pages/score/list',                   // 我的
+      'pages/report/detail',                // 报告详情
+      'pages/report/index',                 // 报告
+      'pages/index/index',                  // 首页
     ],
     tabBar: {
       color: '#999',
