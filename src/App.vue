@@ -1,12 +1,22 @@
 
 <script>
+import tools from '@/utils/tools'
 export default {
-  onLaunch (options) {
-    // Do something initial when launch.
-    console.log('App onLaunch, env文件自定义的环境变量VUE_APP_TEST值:', process.env.VUE_APP_TEST)
+  onLaunch () {
+    console.log('App onLaunch')
+    let userInfo = tools.getCookie('userInfo')
+    if (userInfo) {
+      this.$store.dispatch('putUserInfo', userInfo)
+    }
   },
-  onShow (options) {
-    // Do something when show.
+  onShow () {
+    // 小程序强制更新
+    if (Megalo.canIUse('getUpdateManager')) {
+      const updateManager = Megalo.getUpdateManager()
+      updateManager.onUpdateReady(function () {
+        updateManager.applyUpdate()
+      })
+    }
     console.log('App onShow')
   },
   onHide () {
@@ -16,11 +26,6 @@ export default {
   onError (msg) {
     console.log('App onError')
     console.log(msg)
-  },
-  globalData () {
-    return {
-      a: 'I am global data'
-    }
   }
 }
 </script>

@@ -39,41 +39,29 @@ let analyseOption = {
         color: '#9197A3'
       }
     },
-    indicator: [
-      { name: '身高', max: 65 },
-      { name: '灵敏', max: 16 },
-      { name: '柔韧', max: 30 },
-      { name: '下肢力量', max: 38 },
-      { name: '上肢力量', max: 52 },
-      { name: '协调性', max: 25 },
-      { name: '平衡力', max: 25 },
-      { name: '体重', max: 25 },
-    ]
+    indicator: []
   },
   series: [{
     type: 'radar',
-    data: [
-      {
-        value: [43, 10, 28, 30, 50, 19, 20, 19],
-        name: '班级平均'
-      },
-      {
-        value: [50, 14, 28, 31, 42, 21, 12, 14],
-        name: '园所平均'
-      }
-    ]
+    data: []
   }],
   color: ['#FF6889', '#31BFFF'],
 }
 
 export default {
+  props: {
+    obj: Object
+  },
   data () {
     return {
+      analyseOption,
       ec: {}
     }
   },
   created () {
-    this.ec.options = analyseOption
+    this.analyseOption.series[0].data = this.obj.data
+    this.analyseOption.radar.indicator = this.obj.indicator
+    this.ec.options = this.analyseOption
   }
 }
 </script>

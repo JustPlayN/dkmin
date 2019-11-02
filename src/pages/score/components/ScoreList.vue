@@ -6,85 +6,13 @@
       <div class="point">得分</div>
       <div class="operate">操作</div>
     </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
+    <div class="list-item border-b" v-for="item in list.slice(0, showLength)" :key="item.studentNo">
+      <div class="name">{{item.studentName}}</div>
+      <div class="grade">{{item.fieldValue}}</div>
+      <div class="score">{{item.score}}</div>
       <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item border-b">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
-      </div>
-    </div>
-    <div class="list-item">
-      <div class="name">汪成平</div>
-      <div class="grade">10</div>
-      <div class="score">8</div>
-      <div class="operate">
-        <img class="o-icon" src="@/native/img/modify.png" />
-        <img class="o-icon" src="@/native/img/delete.png" />
+        <img class="o-icon" src="http://121.41.3.152/img/modify.png" @click="modify(item)" />
+        <img class="o-icon" src="http://121.41.3.152/img/delete.png" @click="remove(item)" />
       </div>
     </div>
   </div>
@@ -92,6 +20,18 @@
 
 <script>
 export default {
+  props: {
+    list: Array,
+    showLength: Number
+  },
+  methods: {
+    remove (item) {
+      this.$emit('remove', item)
+    },
+    modify (item) {
+      this.$emit('modify', item)
+    }
+  }
 }
 </script>
 

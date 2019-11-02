@@ -1,19 +1,36 @@
 <template>
   <div class="device-card">
-    <img src="@/native/img/qmark.png" class="q-icon" />
-    <img src="@/native/img/sg.png" class="device-icon" />
-    <div class="title">身高</div>
-    <div class="desc">身体维度：体重</div>
-    <div class="text">测量仪器：身高体重测量</div>
+    <img src="@/native/img/qmark.png" @click="showModal" class="q-icon" />
+    <img :src="obj.img" class="device-icon" />
+    <div class="title">{{obj.deviceRange}}</div>
+    <div class="desc">身体维度：{{obj.measureDimension}}</div>
+    <div class="text">测量仪器：{{obj.deviceType}}</div>
     <div class="bottom">
       <img src="@/native/img/wifi.png" class="wifi" />
-      <div class="btn">查看记录</div>
+      <div class="btn" @click="toClassList">查看记录</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    obj: Object
+  },
+  methods: {
+    showModal () {
+      Megalo.showModal({
+        title: this.obj.deviceRange,
+        content: `测试说明：${this.obj.measureMethod}`,
+        showCancel: false,
+        confirmText: '我知道了',
+        confirmColor: '#31BFFF'
+      })
+    },
+    toClassList () {
+      Megalo.navigateTo({ url: `/pages/score/list?fieldId=${this.obj.id}` })
+    }
+  }
 }
 </script>
 

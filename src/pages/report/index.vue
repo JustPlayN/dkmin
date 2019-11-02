@@ -1,31 +1,109 @@
 <template>
   <div class="index">
     <div class="top fixed-t">
-      <div class="top-item"><text class="name">小三班</text><text class="iconfont iconchange" /></div>
-      <div class="top-item">2015-10-02<text class="iconfont iconchange" /></div>
+      <div class="top-item" @click="showPickerClass = true">
+        <text class="name">{{nowClass.name}}</text>
+        <text class="iconfont iconchange" v-if="classList.length > 1" />
+      </div>
+      <div class="top-item">{{nowDate}}<text class="iconfont iconchange" /></div>
     </div>
     <div class="main">
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
+      <report-item v-for="item in reportList.slice(0, showLength)" :key="item.studentNo" :obj="item" />
     </div>
-    <div class="btm-btn fixed-b">
+    <div class="btm-btn fixed-b" @click="checkReport">
       <text class="iconfont iconchange" />
       <div class="text">查看当次班级报告</div>
     </div>
+    <picker-class v-if="classList.length > 0 && showPickerClass" :list="classList" :index="classIndex"
+      @close="showPickerClass = false" @sure="getNowClass" />
   </div>
 </template>
-
+<config>
+{
+  enablePullDownRefresh: true
+}
+</config>
 <script>
 import ReportItem from './components/ReportItem'
+import PickerClass from '@/components/PickerClass'
 export default {
   components: {
-    ReportItem
-  }
+    ReportItem,
+    PickerClass
+  },
+  data () {
+    return {
+      showPickerClass: false,
+      reportList: [],
+      classList: [],
+      classIndex: 0,
+      nowClass: {},
+      nowDate: '2019-09-26',
+      canCreateReport: false,
+      showLength: 8
+    }
+  },
+  methods: {
+    getNowClass (obj) {
+      if (this.classIndex !== obj.index) {
+        this.nowClass = obj.value
+        this.classIndex = obj.index
+        this.getReportList()
+      }
+    },
+    getReportList () {
+      this.$request('mini/reportList', {
+        params: {
+          classId: this.nowClass.id,
+          date: this.nowDate
+        }
+      }).then(res => {
+        if (res.success) {
+          this.showLength = 8
+          this.canCreateReport = res.data.canCreateReport || true
+          this.reportList = res.data.list
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    },
+    getClassList () {
+      this.$request('mini/teacher/classList').then(res => {
+        if (res.success) {
+          this.classList = res.data
+          this.classIndex = 0
+          this.nowClass = this.classList[0]
+          this.getReportList()
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    },
+    checkReport () {
+      if (this.canCreateReport) {
+        Megalo.navigateTo({
+          url: `/pages/report/detail?classId=${this.nowClass.id}&date=${this.nowDate}`
+        })
+      } else {
+        Megalo.showModal({
+          content: '有部分同学，个别指标得分为0，且最近30天内无体测成绩，暂时无法生成报告，建议补全数据后再来查看报告',
+          confirmText: '确定',
+          confirmColor: '#31BFFF',
+          showCancel: false
+        })
+      }
+    }
+  },
+  onLoad () {
+    this.getClassList()
+  },
+  onPullDownRefresh () {
+    this.getClassList()
+    Megalo.stopPullDownRefresh()
+  },
+  onReachBottom () {
+    this.showLength += 8
+  },
 }
 </script>
 

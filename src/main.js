@@ -7,11 +7,16 @@ import Vuex from 'vuex'
 import './static/css/common.less'
 import './static/css/iconfont.less'
 
+// filters
+import '@/utils/filters'
+
 Vue.use(VHtmlPlugin)
 Vue.use(Vuex)
 
 const store = require('./store').default
 Vue.prototype.$store = store
+const Request = require('./utils/request').default
+Vue.prototype.$request = Request
 
 const app = new Vue(App)
 
@@ -21,16 +26,20 @@ export default {
   config: {
     // pages 的首个页面会被编译成首页
     pages: [
+      'pages/login/index',                  // 登录
+      'pages/report/detail',                // 报告详情
+      'pages/report/index',                 // 报告---老师
+      'pages/score/list',                   // 我的
+      'pages/score/edit',                   // 老师修改学生分数
+      'pages/index/index',                  // 首页
+      'pages/mine/children',                // 宝宝信息
+      'pages/mine/braceletList',            // 我的手环
       'pages/report/personalDetail',        // 家长--个人详情
       'pages/report/history',               // 家长--历史
       'pages/bind/type',                    // 绑定方式
       'pages/bind/index',                   // 绑定
       'pages/mine/index',                   // 我的
       'pages/mine/password',                // 密码
-      'pages/score/list',                   // 我的
-      'pages/report/detail',                // 报告详情
-      'pages/report/index',                 // 报告
-      'pages/index/index',                  // 首页
     ],
     tabBar: {
       color: '#999',

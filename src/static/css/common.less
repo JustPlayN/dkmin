@@ -121,3 +121,26 @@ image {
   color: #C2C6D1;
   font-size: 28rpx;
 }
+
+.picker-indicator {
+  padding: 24rpx 30rpx;
+  height: 48rpx;
+  width: 100%;
+}
+
+/* 下面滑入 */
+@keyframes easeInBottom {
+  from {
+    transform: translateY(100%);
+  } to {
+    transform: translateY(0)
+  }
+}
+/* 下面滑出 */
+@keyframes easeOutBottom {
+  from {
+    transform: translateY(0);
+  } to {
+    transform: translateY(100%)
+  }
+}

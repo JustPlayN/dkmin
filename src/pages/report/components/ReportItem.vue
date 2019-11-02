@@ -1,21 +1,21 @@
 <template>
   <div class="report-item">
-    <div class="score error">28分</div>
-    <div class="left">许婷盛</div>
+    <div class="score" :class="{error: obj.score < 20}">{{obj.score}}分</div>
+    <div class="left">{{obj.studentName}}</div>
     <div class="center">
       <div class="c-top">
         <div class="value-box">
-          <div class="value">100.0cm</div>
+          <div class="value">{{obj.height}}cm</div>
           <div class="title">身高</div>
         </div>
         <div class="value-box">
-          <div class="value">14.8kg</div>
-          <div class="title">身高</div>
+          <div class="value">{{obj.weight}}kg</div>
+          <div class="title">体重</div>
         </div>
       </div>
       <div class="c-btm">
         <text class="name">体测日期：</text>
-        <text class="date">2019-10-23</text>
+        <text class="date">{{obj.date | formatDate('YYYY-MM-DD')}}</text>
       </div>
     </div>
   </div>
@@ -23,6 +23,9 @@
 
 <script>
 export default {
+  props: {
+    obj: Object
+  }
 }
 </script>
 
@@ -53,7 +56,8 @@ export default {
     }
   }
   .left {
-    margin-right: 52rpx;
+    min-width: 100rpx;
+    margin-right: 42rpx;
     font-size: 32rpx;
     line-height: 44rpx;
     font-weight: bold;

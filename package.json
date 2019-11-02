@@ -22,6 +22,7 @@
     "@megalo/eslint-config-standard": "latest",
     "@megalo/target": "latest",
     "@megalo/template-compiler": "latest",
+    "dayjs": "^1.8.16",
     "eslint": "^5.15.3",
     "less": "^3.8.1",
     "less-loader": "^4.1.0"

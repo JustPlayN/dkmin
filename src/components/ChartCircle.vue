@@ -1,22 +1,22 @@
 <template>
   <div class="chart-circle">
-    <div class="title">杭州幼儿园</div>
+    <div class="title">{{obj.shoolName}}</div>
     <div class="msg">
       <div class="left">
         <text class="msg-name">班级：</text>
-        <text class="msg-desc">小三班</text>
+        <text class="msg-desc">{{obj.className}}</text>
       </div>
       <div class="right">
         <text class="msg-name">体测时间：</text>
-        <text class="msg-desc">2017年10月30日</text>
+        <text class="msg-desc">{{obj.testTime | formatDate('YYYY年MM月DD日')}}</text>
       </div>
     </div>
     <div class="msg">
-      <text class="msg-name">班级：</text>
-      <text class="msg-desc">小三班</text>
+      <text class="msg-name">体测人数：</text>
+      <text class="msg-desc">{{obj.studentNum}}人</text>
     </div>
     <div class="echart-box">
-      <ec-canvas canvas-id="circle-canvas" :ec="ec" />
+      <ec-canvas canvas-id="circle-canvas" v-if="ec.options" :ec="ec" />
     </div>
   </div>
 </template>
@@ -46,12 +46,7 @@ let cirleOption = {
       center: ['50%', '40%'],
       avoidLabelOverlap: false,
       top: 64,
-      data: [
-        { value: 310, name: '优秀' },
-        { value: 234, name: '良好' },
-        { value: 135, name: '合格' },
-        { value: 248, name: '不合格' }
-      ],
+      data: [],
       itemStyle: {
         normal: {
           label: {
@@ -67,13 +62,18 @@ let cirleOption = {
 }
 
 export default {
+  props: {
+    obj: Object
+  },
   data () {
     return {
+      cirleOption,
       ec: {}
     }
   },
   created () {
-    this.ec.options = cirleOption
+    this.cirleOption.series[0].data = this.obj.data
+    this.ec.options = this.cirleOption
   }
 }
 </script>

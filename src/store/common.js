@@ -1,50 +1,32 @@
-// root state object.
-// each Vuex instance is just a single state tree.
+import tools from '@/utils/tools'
+
 const state = {
-  count: 0
+  userInfo: {
+    token: '',
+    roleId: '',     // 5：家长，4：老师
+    userName: '',
+    phone: ''
+  }
 }
 
-// mutations are operations that actually mutates the state.
-// each mutation handler gets the entire state tree as the
-// first argument, followed by additional payload arguments.
-// mutations must be synchronous and can be recorded by plugins
-// for debugging purposes.
 const mutations = {
-  increment (state) {
-    state.count++
-  },
-  decrement (state) {
-    state.count--
-  }
-}
-
-// actions are functions that cause side effects and can involve
-// asynchronous operations.
-const actions = {
-  increment: ({ commit }) => commit('increment'),
-  decrement: ({ commit }) => commit('decrement'),
-  incrementIfOdd ({ commit, state }) {
-    if ((state.count + 1) % 2 === 0) {
-      commit('increment')
+  putUserInfo (state, val) {
+    state.userInfo = {
+      ...state.userInfo,
+      ...val
     }
-  },
-  incrementAsync ({ commit }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('increment')
-        resolve()
-      }, 1000)
-    })
+    tools.setCookie('userInfo', state.userInfo, 86400000)     // 24小时有效
   }
 }
 
-// getters are functions
-const getters = {
-  evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
+const actions = {
+  putUserInfo: ({ commit }, val) => commit('putUserInfo', val)
 }
 
-// A Vuex instance is created by combining the state, mutations, actions,
-// and getters.
+const getters = {
+  userInfo: state => state.userInfo
+}
+
 export default {
   state,
   getters,
