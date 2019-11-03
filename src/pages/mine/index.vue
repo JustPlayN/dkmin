@@ -2,28 +2,52 @@
   <div class="index">
     <div class="user-info">
       <div class="user-img"><open-data type="userAvatarUrl"></open-data></div>
-      <div class="username">王晓亚老师</div>
-      <div class="userphone">13789767654</div>
+      <div class="username">{{userInfo.userName}}</div>
+      <div class="userphone">{{userInfo.phone}}</div>
     </div>
-    <personal />
-    <class-list />
+    <class-list v-if="userInfo.roleId === '4'" :list="classList" />
   </div>
 </template>
 
 <script>
-import Personal from './components/Personal'
 import ClassList from './components/ClassList'
+import { mapGetters } from 'vuex'
 export default {
   components: {
-    Personal,
     ClassList
+  },
+  data () {
+    return {
+      classList: []
+    }
+  },
+  computed: {
+    ...mapGetters(['userInfo'])
+  },
+  methods: {
+    getClassList () {
+      this.$request('mini/teacher/classList').then(res => {
+        if (res.success) {
+          this.classList = res.data
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    },
+  },
+  onLoad () {
+    this.getClassList()
   }
 }
 </script>
 
 <style lang="less" scoped>
+.index {
+  min-height: 100vh;
+  padding: 176rpx 0 60rpx;
+  background: url(http://121.41.3.152/img/bg.png) top /contain no-repeat;
+}
 .user-info {
-  margin-top: 176rpx;
   position: relative;
   height: 250rpx;
   padding: 94rpx 48rpx 0;

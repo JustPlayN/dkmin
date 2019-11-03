@@ -3,7 +3,8 @@
     <div class="echart-box">
       <ec-canvas canvas-id="sg-canvas" :ec="ec" />
     </div>
-    <div class="tip">（1-2分偏矮，3分中等，4分偏高，5分超高）</div>
+    <div class="tip" v-if="obj.name === '身高'">（1-2分偏矮，3分中等，4分偏高，5分超高）</div>
+    <div class="tip" v-else>（1分偏瘦，3分正常，5分偏胖）</div>
   </div>
 </template>
 
@@ -36,12 +37,7 @@ let sgOption = {
   tooltip: {},
   dataset: {
     dimensions: ['product', 'man', 'woman'],
-    source: [
-      { product: '偏矮', man: 43.3, woman: 85.8 },
-      { product: '中等', man: 83.1, woman: 73.4 },
-      { product: '偏高', man: 86.4, woman: 65.2 },
-      { product: '超高', man: 72.4, woman: 53.9 }
-    ]
+    source: []
   },
   xAxis: {
     type: 'category',
@@ -99,12 +95,30 @@ let sgOption = {
   ]
 }
 export default {
+  props: {
+    obj: Object
+  },
   data () {
     return {
+      sgOption,
       ec: {}
     }
   },
   created () {
+    if (this.obj.name === '身高') {
+      this.sgOption.dataset.source = [
+        { product: '偏矮', man: this.obj.dwarfMaleNum, woman: this.obj.dwarfFemaleNum },
+        { product: '中等', man: this.obj.mediumMaleNum, woman: this.obj.mediumFemaleNum },
+        { product: '偏高', man: this.obj.highMaleNum, woman: this.obj.highFemaleNum },
+        { product: '超高', man: this.obj.superHighMaleNum, woman: this.obj.superHighFemaleNum }
+      ]
+    } else {
+      this.sgOption.dataset.source = [
+        { product: '偏瘦', man: this.obj.thinMaleNum, woman: this.obj.thinFemaleNum },
+        { product: '正常', man: this.obj.normalMaleNum, woman: this.obj.normalFemaleNum },
+        { product: '超重', man: this.obj.overWeightMaleNum, woman: this.obj.overWeightFemaleNum }
+      ]
+    }
     this.ec.options = sgOption
   }
 }

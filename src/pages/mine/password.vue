@@ -7,14 +7,14 @@
       </div>
       <div class="item border-b">
         <div class="left">原密码</div>
-        <input type="password" v-model="password" class="right" placeholder="请输入" />
+        <input type="password" v-model="oldPwd" class="right" placeholder="请输入" />
       </div>
       <div class="item border-b">
         <div class="left">新密码</div>
-        <input type="password" v-model="newPassword" class="right" placeholder="请输入" />
+        <input type="password" v-model="newPwd" class="right" placeholder="请输入" />
       </div>
     </div>
-    <div class="btn" :class="{disabled: !password || !newPassword}">提交</div>
+    <div class="btn" :class="{disabled: !oldPwd || !newPwd}">提交</div>
   </div>
 </template>
 
@@ -22,8 +22,8 @@
 export default {
   data () {
     return {
-      password: '',
-      newPassword: ''
+      oldPwd: '',
+      newPwd: ''
     }
   }
 }

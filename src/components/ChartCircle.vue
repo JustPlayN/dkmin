@@ -1,6 +1,6 @@
 <template>
   <div class="chart-circle">
-    <div class="title">{{obj.shoolName}}</div>
+    <div class="title">{{obj.schoolName}}</div>
     <div class="msg">
       <div class="left">
         <text class="msg-name">班级：</text>
@@ -8,7 +8,7 @@
       </div>
       <div class="right">
         <text class="msg-name">体测时间：</text>
-        <text class="msg-desc">{{obj.testTime | formatDate('YYYY年MM月DD日')}}</text>
+        <text class="msg-desc">{{obj.testTime}}</text>
       </div>
     </div>
     <div class="msg">

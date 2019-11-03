@@ -1,10 +1,6 @@
 <template>
   <div class="single-analyse">
-    <analyse-item />
-    <analyse-item />
-    <analyse-item />
-    <analyse-item />
-    <analyse-item />
+    <analyse-item v-for="(item, index) in list" :key="index" :obj="item" />
   </div>
 </template>
 
@@ -13,6 +9,9 @@ import AnalyseItem from '@/components/AnalyseItem'
 export default {
   components: {
     AnalyseItem
+  },
+  props: {
+    list: Array
   }
 }
 </script>

@@ -1,23 +1,13 @@
 <template>
   <div class="class-list">
-    <div class="class-item">
+    <div class="class-item" v-for="item in list" :key="item.id">
       <div class="class">
         <text class="title">所带班级：</text>
-        <div class="name">小三班</div>
+        <div class="name">{{item.name}}</div>
       </div>
       <div class="compus">
-        <text class="title">所带园所：</text>
-        <div class="name">xxx幼儿园</div>
-      </div>
-    </div>
-    <div class="class-item">
-      <div class="class">
-        <text class="title">所带班级：</text>
-        <div class="name">小三班</div>
-      </div>
-      <div class="compus">
-        <text class="title">所带园所：</text>
-        <div class="name">xxx幼儿园</div>
+        <text class="title">所在园所：</text>
+        <div class="name">{{item.schoolName}}</div>
       </div>
     </div>
   </div>
@@ -25,6 +15,9 @@
 
 <script>
 export default {
+  props: {
+    list: Array
+  }
 }
 </script>
 

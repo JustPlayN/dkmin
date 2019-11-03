@@ -5,7 +5,7 @@
         <text class="name">{{nowClass.name}}</text>
         <text class="iconfont iconchange" v-if="classList.length > 1" />
       </div>
-      <div class="top-item">{{nowDate}}<text class="iconfont iconchange" /></div>
+      <div class="top-item" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
     </div>
     <div class="main">
       <report-item v-for="item in reportList.slice(0, showLength)" :key="item.studentNo" :obj="item" />
@@ -16,6 +16,8 @@
     </div>
     <picker-class v-if="classList.length > 0 && showPickerClass" :list="classList" :index="classIndex"
       @close="showPickerClass = false" @sure="getNowClass" />
+    <picker-date v-if="dateList.length > 0 && showPickerDate" :list="dateList" :index="dateIndex"
+      @close="showPickerDate = false" @sure="getNowDate" />
   </div>
 </template>
 <config>
@@ -26,19 +28,24 @@
 <script>
 import ReportItem from './components/ReportItem'
 import PickerClass from '@/components/PickerClass'
+import PickerDate from '@/components/PickerDate'
 export default {
   components: {
     ReportItem,
-    PickerClass
+    PickerClass,
+    PickerDate
   },
   data () {
     return {
       showPickerClass: false,
+      showPickerDate: false,
       reportList: [],
       classList: [],
       classIndex: 0,
       nowClass: {},
-      nowDate: '2019-09-26',
+      dateList: [],
+      nowDate: '',
+      dateIndex: 0,
       canCreateReport: false,
       showLength: 8
     }
@@ -47,6 +54,13 @@ export default {
     getNowClass (obj) {
       if (this.classIndex !== obj.index) {
         this.nowClass = obj.value
+        this.classIndex = obj.index
+        this.getReportList()
+      }
+    },
+    getNowDate (obj) {
+      if (this.dateIndex !== obj.index) {
+        this.nowDate = obj.value
         this.classIndex = obj.index
         this.getReportList()
       }
@@ -60,7 +74,7 @@ export default {
       }).then(res => {
         if (res.success) {
           this.showLength = 8
-          this.canCreateReport = res.data.canCreateReport || true
+          this.canCreateReport = res.data.canCreateReport
           this.reportList = res.data.list
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
@@ -92,13 +106,26 @@ export default {
           showCancel: false
         })
       }
+    },
+    getDateList () {
+      this.$request('mini/timeList').then(res => {
+        if (res.success) {
+          this.dateList = res.data
+          if (this.dateIndex === 0) {
+            this.nowDate = this.dateList[0].dateTime
+          }
+          this.getClassList()
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
     }
   },
   onLoad () {
-    this.getClassList()
+    this.getDateList()
   },
   onPullDownRefresh () {
-    this.getClassList()
+    this.getReportList()
     Megalo.stopPullDownRefresh()
   },
   onReachBottom () {

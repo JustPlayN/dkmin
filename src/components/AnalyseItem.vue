@@ -1,27 +1,42 @@
 <template>
   <div class="anaylse-item">
     <div class="top" @click="heightChange" :class="{'border-b': showInfo}">
-      <img class="icon" src="@/native/img/sg.png" />
-      <div class="name">身高<text class="desc">（走拼横木）</text></div>
-      <div class="average">平均121cm</div>
-      <div class="tag">优秀</div>
-      <text class="iconfont iconright" />
+      <img class="icon" :src="obj.iconUrl" />
+      <div class="name">
+        {{obj.name}}
+        <text class="desc" v-if="obj.desc">（{{obj.desc}}）</text>
+      </div>
+      <div class="average">平均{{obj.average}}{{obj.unit}}</div>
+      <div class="tag bad" v-if="obj.qualifiedPercent < 60">不合格</div>
+      <div class="tag pass" v-else-if="obj.qualifiedPercent < 70">合格</div>
+      <div class="tag good" v-else-if="obj.qualifiedPercent < 90">良好</div>
+      <div class="tag" v-else>优秀</div>
+      <text class="iconfont" :class="{'iconjiantou-xia': !showInfo, 'iconjiantou-shang': showInfo}" />
     </div>
     <div class="bottom" :style="{height: `${height}px`}">
-      <div class="content" id="content">
-        <div class="progress-box">
+      <div class="content" :id="obj.elId">
+        <div class="progress-box" v-if="obj.name !== '身高' && obj.name !== '体重'">
           <div class="p-desc">
-            全班合格人数<text class="red">3人</text>，
-            合格率<text class="red">30%</text>
+            全班合格人数<text class="red">{{obj.qualifiedNum}}人</text>，
+            合格率<text class="red">{{obj.qualifiedPercent}}%</text>
           </div>
-          <div class="process">
-            <div class="processer" :style="{width: `300rpx`}" />
+          <div class="process bad" v-if="obj.qualifiedPercent < 60">
+            <div class="processer" :style="{width: `${obj.qualifiedPercent}%`}" />
+          </div>
+          <div class="process pass" v-else-if="obj.qualifiedPercent < 70">
+            <div class="processer" :style="{width: `${obj.qualifiedPercent}%`}" />
+          </div>
+          <div class="process good" v-else-if="obj.qualifiedPercent < 90">
+            <div class="processer" :style="{width: `${obj.qualifiedPercent}%`}" />
+          </div>
+          <div class="process" v-else>
+            <div class="processer" :style="{width: `${obj.qualifiedPercent}%`}" />
           </div>
         </div>
-        <!-- <div class="sg-chart-box">
-          <sg-chart v-if="showInfo" />
-        </div> -->
-        <div class="desc">反映幼儿上肢和腰腹肌肉力量，是影响幼儿体育活动的重要因素上肢力量良好，将来有成为大力水手的潜质！</div>
+        <div class="sg-chart-box" v-else>
+          <sg-chart v-if="showInfo" :obj="obj" />
+        </div>
+        <div class="desc">{{obj.remark}}</div>
       </div>
     </div>
   </div>
@@ -32,6 +47,9 @@ import SgChart from '@/components/SgChart'
 export default {
   components: {
     SgChart
+  },
+  props: {
+    obj: Object
   },
   data () {
     return {
@@ -51,7 +69,7 @@ export default {
           })
         } else {
           _this.query = Megalo.createSelectorQuery()
-          _this.query.select('#content').boundingClientRect()
+          _this.query.select(`#${this.obj.elId}`).boundingClientRect()
           _this.query.exec(function (res) {
             _this.height = res[0].height
           })

@@ -1,11 +1,6 @@
 <template>
   <div class="personal">
-    <!-- <div class="item">
-      <img src="@/native/img/info.png" class="item-icon" />
-      <div class="name">基础信息</div>
-      <text class="iconfont iconright" />
-    </div> -->
-    <div class="item">
+    <div class="item" @click="toPassword">
       <img src="@/native/img/pwd.png" class="item-icon" />
       <div class="name">修改密码</div>
       <text class="iconfont iconright" />
@@ -15,6 +10,11 @@
 
 <script>
 export default {
+  methods: {
+    toPassword () {
+      Megalo.navigateTo({ url: `/pages/mine/password` })
+    }
+  }
 }
 </script>
 

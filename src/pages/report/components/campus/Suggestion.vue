@@ -1,58 +1,19 @@
 <template>
   <div class="suggestion">
     <div class="s-title">强化目标</div>
-    <div class="suggest-item">
-      <img class="icon" src="@/native/img/rrx.png" />
+    <div class="suggest-item" v-for="num in list" :key="num">
+      <img class="icon" :src="obj[num].iconUrl" />
       <div class="right">
-        <div class="title">坐位体前屈（柔韧）</div>
-        <div class="tips">相关动作</div>
+        <div class="title">{{obj[num].name}}</div>
+        <div class="tips">相关训练</div>
         <div class="tag-box">
           <div class="tag">
-            <text class="text">策划部</text>
-            <text class="iconfont iconright" />
+            <text class="text">{{obj[num].desc}}</text>
           </div>
         </div>
       </div>
     </div>
-    <div class="suggest-item">
-      <img class="icon" src="@/native/img/rrx.png" />
-      <div class="right">
-        <div class="title">坐位体前屈（柔韧）</div>
-        <div class="tips">相关动作</div>
-        <div class="tag-box">
-          <div class="tag">
-            <text class="text">策划部</text>
-            <text class="iconfont iconright" />
-          </div>
-          <div class="tag">
-            <text class="text">原地排球</text>
-            <text class="iconfont iconright" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="suggest-item">
-      <img class="icon" src="@/native/img/rrx.png" />
-      <div class="right">
-        <div class="title">坐位体前屈（柔韧）</div>
-        <div class="tips">相关动作</div>
-        <div class="tag-box">
-          <div class="tag">
-            <text class="text">策划部</text>
-            <text class="iconfont iconright" />
-          </div>
-          <div class="tag">
-            <text class="text">双手接球</text>
-            <text class="iconfont iconright" />
-          </div>
-          <div class="tag">
-            <text class="text">原地排球</text>
-            <text class="iconfont iconright" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="empty">
+    <div class="empty" v-if="list.length === 0">
       <img src="@/native/img/suggestEmpty.png" class="empty-img" />
       <div class="empty-desc">
         恭喜！该班级所有项目合格率均高于80% <br>
@@ -64,6 +25,55 @@
 
 <script>
 export default {
+  props: {
+    list: Array
+  },
+  data () {
+    return {
+      obj: {
+        1: {
+          iconUrl: 'http://121.41.3.152/img/sg.png',
+          name: '身高',
+          desc: '注意饮食适当运动',
+        },
+        2: {
+          iconUrl: 'http://121.41.3.152/img/tz.png',
+          name: '体重',
+          desc: '注意饮食适当运动',
+        },
+        3: {
+          iconUrl: 'http://121.41.3.152/img/wfp.png',
+          name: '灵敏性',
+          desc: '十米折返跑',
+        },
+        4: {
+          iconUrl: 'http://121.41.3.152/img/tiao.png',
+          name: '下肢力量',
+          desc: '立定跳远',
+        },
+        5: {
+          iconUrl: 'http://121.41.3.152/img/wq.png',
+          name: '上肢力量',
+          desc: '网球掷远',
+        },
+        6: {
+          iconUrl: 'http://121.41.3.152/img/xtx.png',
+          name: '协调性',
+          desc: '双脚连续跳',
+        },
+        7: {
+          iconUrl: 'http://121.41.3.152/img/rrx.png',
+          name: '柔韧性',
+          desc: '坐位体前屈',
+        },
+        8: {
+          iconUrl: 'http://121.41.3.152/img/phm.png',
+          name: '平衡力',
+          desc: '走平衡木',
+        }
+      }
+    }
+  },
 }
 </script>
 
@@ -107,7 +117,7 @@ export default {
       display: flex;
       align-items: center;
       height: 64rpx;
-      padding: 0 24rpx 0 32rpx;
+      padding: 0 32rpx;
       margin: 24rpx 16rpx 0 0 ;
       background: #31BFFF;
       border-radius: 32rpx;

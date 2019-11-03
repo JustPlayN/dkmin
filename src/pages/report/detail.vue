@@ -8,8 +8,8 @@
     </div>
     <div class="item-box">
       <total-analyse v-if="navStatus === 0 && totalAnalyseObj" :obj="totalAnalyseObj" />
-      <single-analyse v-if="navStatus === 1" />
-      <suggestion v-if="navStatus === 2" />
+      <single-analyse v-if="navStatus === 1" :list="singleAnalyseData" />
+      <suggestion v-if="navStatus === 2" :list="suggestionData" />
     </div>
   </div>
 </template>
@@ -38,7 +38,9 @@ export default {
       classId: '',
       date: '',
       chartCircleObj: null,
-      totalAnalyseObj: null
+      totalAnalyseObj: null,
+      singleAnalyseData: null,
+      suggestionData: []
     }
   },
   methods: {
@@ -50,19 +52,22 @@ export default {
         }
       }).then(res => {
         if (res.success) {
+          let goodNum = res.data.goodNum - res.data.excellentNum
+          let qualifiedNum = res.data.qualifiedNum - res.data.goodNum
           this.chartCircleObj = {
-            shoolName: res.data.shoolName,
-            className: res.data.classId,
+            schoolName: res.data.schoolName,
+            className: res.data.className,
             testTime: res.data.testTime,
             studentNum: res.data.studentNum,
             data: [
               { value: res.data.excellentNum, name: '优秀' },
-              { value: res.data.goodNum, name: '良好' },
-              { value: res.data.qualifiedNum, name: '合格' },
+              { value: goodNum, name: '良好' },
+              { value: qualifiedNum, name: '合格' },
               { value: res.data.unQualifiedNum, name: '不合格' },
             ]
           }
           this.totalAnalyseObj = {
+            summary: res.data.summary,
             data: [{
               value: [
                 res.data.classAverageHeight,
@@ -87,54 +92,111 @@ export default {
                 res.data.schoolAverageWeight
               ],
               name: '园所平均'
-            }],
-            indicator: [
-              { name: '身高', max: 65 },
-              { name: '灵敏', max: 16 },
-              { name: '柔韧', max: 30 },
-              { name: '下肢力量', max: 38 },
-              { name: '上肢力量', max: 52 },
-              { name: '协调性', max: 25 },
-              { name: '平衡力', max: 25 },
-              { name: '体重', max: 25 }
-            ]
+            }]
           }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
-        this.chartCircleObj = {
-          shoolName: '学校名称',
-          className: '小三班',
-          testTime: + new Date(),
-          studentNum: 1000,
-          data: [
-            { value: 200, name: '优秀' },
-            { value: 300, name: '良好' },
-            { value: 100, name: '合格' },
-            { value: 400, name: '不合格' },
-          ]
+      })
+    },
+    getSingleData () {
+      this.$request('mini/eachItemAnalysis', {
+        params: {
+          classId: this.classId,
+          date: this.date
         }
-        this.totalAnalyseObj = {
-          data: [
+      }).then(res => {
+        if (res.success) {
+          this.singleAnalyseData = [
             {
-              value: [43, 10, 28, 30, 50, 19, 20, 19],
-              name: '班级平均'
+              ...res.data.heightDto,
+              iconUrl: 'http://121.41.3.152/img/sg.png',
+              name: '身高',
+              desc: '',
+              average: res.data.heightDto.averageHeight,
+              unit: 'cm',
+              elId: 'sg'
             },
             {
-              value: [50, 14, 28, 31, 42, 21, 12, 14],
-              name: '园所平均'
+              ...res.data.weightDto,
+              iconUrl: 'http://121.41.3.152/img/tz.png',
+              name: '体重',
+              desc: '',
+              average: res.data.weightDto.averageWeight,
+              unit: 'kg',
+              elId: 'tz'
+            },
+            {
+              ...res.data.balance,
+              iconUrl: 'http://121.41.3.152/img/phm.png',
+              name: '平衡力',
+              desc: '走平衡木',
+              average: res.data.balance.average,
+              unit: 's',
+              elId: 'phm'
+            },
+            {
+              ...res.data.harmony,
+              iconUrl: 'http://121.41.3.152/img/xtx.png',
+              name: '协调性',
+              desc: '双脚连续跳',
+              average: res.data.harmony.average,
+              unit: '个',
+              elId: 'xtx'
+            },
+            {
+              ...res.data.upLimbStrength,
+              iconUrl: 'http://121.41.3.152/img/wq.png',
+              name: '上肢力量',
+              desc: '网球掷远',
+              average: res.data.upLimbStrength.average,
+              unit: 'm',
+              elId: 'wq'
+            },
+            {
+              ...res.data.lowerLimbStrength,
+              iconUrl: 'http://121.41.3.152/img/tiao.png',
+              name: '下肢力量',
+              desc: '立定跳远',
+              average: res.data.lowerLimbStrength.average,
+              unit: 'm',
+              elId: 'tiao'
+            },
+            {
+              ...res.data.flex,
+              iconUrl: 'http://121.41.3.152/img/rrx.png',
+              name: '柔韧性',
+              desc: '坐位体前屈',
+              average: res.data.flex.average,
+              unit: 'cm',
+              elId: 'rrx'
+            },
+            {
+              ...res.data.sensitivity,
+              iconUrl: 'http://121.41.3.152/img/wfp.png',
+              name: '灵敏性',
+              desc: '十米折返跑',
+              average: res.data.sensitivity.average,
+              unit: 's',
+              elId: 'wfp'
             }
-          ],
-          indicator: [
-            { name: '身高', max: 65 },
-            { name: '灵敏', max: 16 },
-            { name: '柔韧', max: 30 },
-            { name: '下肢力量', max: 38 },
-            { name: '上肢力量', max: 52 },
-            { name: '协调性', max: 25 },
-            { name: '平衡力', max: 25 },
-            { name: '体重', max: 25 }
           ]
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    },
+    getSuggestionObj () {
+      this.$request('mini/class/proposal', {
+        params: {
+          classId: this.classId,
+          date: this.date
+        }
+      }).then(res => {
+        if (res.success) {
+          this.suggestionData = res.data
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
       })
     }
@@ -143,6 +205,8 @@ export default {
     this.classId = opt.classId
     this.date = opt.date
     this.getReportDate()
+    this.getSingleData()
+    this.getSuggestionObj()
   }
 }
 </script>

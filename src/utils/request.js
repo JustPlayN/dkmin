@@ -1,5 +1,4 @@
 import store from '@/store'
-
 /**
  * @function 请求接口封装
  * @param {string} url：接口地址
@@ -22,6 +21,7 @@ function Request (url, body = {}) {
       }
     }).then(res => {
       if ((res.data.code === '-1') && !fitNoLogin) {
+        Megalo.removeStorageSync('userInfo')
         Megalo.reLaunch({ url: `/pages/login/index` })
       } else {
         resolve(res.data)

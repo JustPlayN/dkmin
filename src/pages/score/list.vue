@@ -9,7 +9,7 @@
         <div class="item-right">当前已测：{{recordNum}}条</div>
       </div>
       <div class="item-two">
-        <div class="item-left">2015-10-02<text class="iconfont iconchange" /></div>
+        <div class="item-left" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
         <div class="item-right">
           <div class="item" :class="{active: sort === 0}" @click="changeSort(0)">
             时间<text class="iconfont iconjiantou-xia" />
@@ -23,32 +23,46 @@
     <score-list :list="recordList" @remove="removeRecord" @modify="modifyRecord" :showLength="showLength" />
     <picker-class v-if="classList.length > 0 && showPickerClass" :list="classList" :index="classIndex"
       @close="showPickerClass = false" @sure="getNowClass" />
+    <picker-date v-if="dateList.length > 0 && showPickerDate" :list="dateList" :index="dateIndex"
+      @close="showPickerDate = false" @sure="getNowDate" />
   </div>
 </template>
 
 <script>
 import ScoreList from './components/ScoreList'
 import PickerClass from '@/components/PickerClass'
+import PickerDate from '@/components/PickerDate'
 export default {
   components: {
     ScoreList,
-    PickerClass
+    PickerClass,
+    PickerDate
   },
   data () {
     return {
       showPickerClass: false,
+      showPickerDate: false,
       recordList: [],
       recordNum: 0,
       classList: [],
       nowClass: {},
       classIndex: 0,
       fieldId: 1,
-      nowDate: '2019-09-26',
+      dateList: [],
+      nowDate: '',
+      dateIndex: 0,
       sort: 0,                  // 0：时间排序，1：成绩排序
       showLength: 12
     }
   },
   methods: {
+    getNowDate (obj) {
+      if (this.dateIndex !== obj.index) {
+        this.nowDate = obj.value
+        this.classIndex = obj.index
+        this.getRecordList()
+      }
+    },
     removeRecord (val) {
       Megalo.showModal({
         content: '确认清空本次分数吗？',
@@ -121,13 +135,23 @@ export default {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
       })
+    },
+    getDateList () {
+      this.$request('mini/timeList').then(res => {
+        if (res.success) {
+          this.dateList = res.data
+          this.nowDate = this.dateList[0].dateTime
+          this.dateIndex = 0
+          this.getClassList()
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
     }
   },
   onLoad (option) {
     this.fieldId = option.fieldId
-  },
-  onShow () {
-    this.getClassList()
+    this.getDateList()
   },
   onReachBottom () {
     this.showLength += 8

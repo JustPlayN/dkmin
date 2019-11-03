@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import tools from '@/utils/tools'
 export default {
   data () {
     return {
@@ -69,6 +70,16 @@ export default {
   },
   onLoad (options) {
     this.fromUrl = options.url
+    let userInfo = tools.getCookie('userInfo')
+    if (userInfo) {
+      if (this.fromUrl) {
+        Megalo.navigateBack()
+      } else if (userInfo.roleId === '4') {       // 老师登录
+        Megalo.switchTab({ url: '/pages/index/index' })
+      } else {                                    // 家长登录
+        Megalo.redirectTo({ url: `/pages/report/history` })
+      }
+    }
     this.getWxCode()
   }
 }
