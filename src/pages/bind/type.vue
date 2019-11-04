@@ -5,16 +5,16 @@
       <div class="nav-item" :class="{active: navStatus === 1}" @click="navStatus = 1">手动添加</div>
     </div>
     <div class="scan" v-if="navStatus === 0">
-      <img src="@/native/img/watch.png" class="bracelet" />
+      <img src="https://www.edolphin.cn/img/watch.png" class="bracelet" />
       <div class="tip">您当前暂未绑定任何手环</div>
       <button class="nostyle btn" open-type="getPhoneNumber">扫一扫</button>
     </div>
     <div class="input-box" v-else>
       <div class="input">
         <text class="iconfont iconshouhuan" />
-        <input class="code" type="text" v-model="code" maxlength="16" placeholder="请输入手环卡片上的16位字符串" />
+        <input class="code" type="text" v-model="handCode" maxlength="16" placeholder="请输入手环卡片上的16位字符串" />
       </div>
-      <div class="btn" :class="{disabled: !code}">确认</div>
+      <div class="btn" :class="{disabled: !code}" @click="bindBracelet">确认</div>
     </div>
   </div>
 </template>
@@ -24,7 +24,22 @@ export default {
   data () {
     return {
       navStatus: 0,
-      code: ''
+      handCode: ''
+    }
+  },
+  methods: {
+    bindBracelet () {
+      this.$request('mini/bindCode', {
+        params: {
+          handCode: this.handCode
+        }
+      }).then(res => {
+        if (res.success) {
+          Megalo.showToast({ title: '绑定成功', icon: 'none' })
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
     }
   }
 }

@@ -110,7 +110,7 @@ export default {
           this.singleAnalyseData = [
             {
               ...res.data.heightDto,
-              iconUrl: 'http://121.41.3.152/img/sg.png',
+              iconUrl: 'https://www.edolphin.cn/img/sg.png',
               name: '身高',
               desc: '',
               average: res.data.heightDto.averageHeight,
@@ -119,7 +119,7 @@ export default {
             },
             {
               ...res.data.weightDto,
-              iconUrl: 'http://121.41.3.152/img/tz.png',
+              iconUrl: 'https://www.edolphin.cn/img/tz.png',
               name: '体重',
               desc: '',
               average: res.data.weightDto.averageWeight,
@@ -128,7 +128,7 @@ export default {
             },
             {
               ...res.data.balance,
-              iconUrl: 'http://121.41.3.152/img/phm.png',
+              iconUrl: 'https://www.edolphin.cn/img/phm.png',
               name: '平衡力',
               desc: '走平衡木',
               average: res.data.balance.average,
@@ -137,7 +137,7 @@ export default {
             },
             {
               ...res.data.harmony,
-              iconUrl: 'http://121.41.3.152/img/xtx.png',
+              iconUrl: 'https://www.edolphin.cn/img/xtx.png',
               name: '协调性',
               desc: '双脚连续跳',
               average: res.data.harmony.average,
@@ -146,7 +146,7 @@ export default {
             },
             {
               ...res.data.upLimbStrength,
-              iconUrl: 'http://121.41.3.152/img/wq.png',
+              iconUrl: 'https://www.edolphin.cn/img/wq.png',
               name: '上肢力量',
               desc: '网球掷远',
               average: res.data.upLimbStrength.average,
@@ -155,7 +155,7 @@ export default {
             },
             {
               ...res.data.lowerLimbStrength,
-              iconUrl: 'http://121.41.3.152/img/tiao.png',
+              iconUrl: 'https://www.edolphin.cn/img/tiao.png',
               name: '下肢力量',
               desc: '立定跳远',
               average: res.data.lowerLimbStrength.average,
@@ -164,7 +164,7 @@ export default {
             },
             {
               ...res.data.flex,
-              iconUrl: 'http://121.41.3.152/img/rrx.png',
+              iconUrl: 'https://www.edolphin.cn/img/rrx.png',
               name: '柔韧性',
               desc: '坐位体前屈',
               average: res.data.flex.average,
@@ -173,7 +173,7 @@ export default {
             },
             {
               ...res.data.sensitivity,
-              iconUrl: 'http://121.41.3.152/img/wfp.png',
+              iconUrl: 'https://www.edolphin.cn/img/wfp.png',
               name: '灵敏性',
               desc: '十米折返跑',
               average: res.data.sensitivity.average,

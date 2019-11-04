@@ -11,8 +11,8 @@
       <div class="grade">{{item.fieldValue}}</div>
       <div class="score">{{item.score}}</div>
       <div class="operate">
-        <img class="o-icon" src="http://121.41.3.152/img/modify.png" @click="modify(item)" />
-        <img class="o-icon" src="http://121.41.3.152/img/delete.png" @click="remove(item)" />
+        <img class="o-icon" src="https://www.edolphin.cn/img/modify.png" @click="modify(item)" />
+        <img class="o-icon" src="https://www.edolphin.cn/img/delete.png" @click="remove(item)" />
       </div>
     </div>
   </div>

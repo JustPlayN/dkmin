@@ -2,7 +2,7 @@
   <div class="suggestion">
     <div class="s-title">强化目标</div>
     <div class="suggest-item">
-      <img class="icon" src="@/native/img/rrx.png" />
+      <img class="icon" src="https://www.edolphin.cn/img/rrx.png" />
       <div class="right">
         <div class="title">坐位体前屈（柔韧）</div>
         <div class="tips">相关动作</div>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="suggest-item">
-      <img class="icon" src="@/native/img/rrx.png" />
+      <img class="icon" src="https://www.edolphin.cn/img/rrx.png" />
       <div class="right">
         <div class="title">坐位体前屈（柔韧）</div>
         <div class="tips">相关动作</div>
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="suggest-item">
-      <img class="icon" src="@/native/img/rrx.png" />
+      <img class="icon" src="https://www.edolphin.cn/img/rrx.png" />
       <div class="right">
         <div class="title">坐位体前屈（柔韧）</div>
         <div class="tips">相关动作</div>
@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="empty">
-      <img src="@/native/img/suggestEmpty.png" class="empty-img" />
+      <img src="https://www.edolphin.cn/img/suggestEmpty.png" class="empty-img" />
       <div class="empty-desc">
         恭喜！该班级所有项目合格率均高于80% <br>
         暂无具体改进方案，强化合格率相对低的项目吧

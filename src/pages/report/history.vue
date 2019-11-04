@@ -3,29 +3,23 @@
     <div class="user-info">
       <div class="user-img"><open-data type="userAvatarUrl"></open-data></div>
       <div class="username"><open-data type="userNickName"></open-data></div>
-      <div class="right">
+      <div class="right" @click="toMine">
         <text>个人中心</text>
         <text class="iconfont iconright" />
       </div>
     </div>
     <div class="main" v-if="reportList.length">
       <div class="img-box">
-        <img src="@/native/img/girl.png" class="img" />
+        <img src="https://www.edolphin.cn/img/girl.png" class="img" />
       </div>
       <div class="banner">
         <text class="title">历史记录</text>
         <div class="right">切换宝宝<text class="iconfont iconchange" /></div>
       </div>
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
-      <report-item />
+      <report-item v-for="(item, index) in reportList" :key="index" :obj="item" @click="toReportDetail(item)" />
     </div>
-    <div class="empty">
-      <img src="@/native/img/watchgray.png" class="empty-img" />
+    <div class="empty" v-if="reportList.length === 0">
+      <img src="https://www.edolphin.cn/img/watchgray.png" class="empty-img" />
       <div class="empty-desc">
         当前您孩子绑定的手环<br>
         还未产生任何体测数据哦
@@ -42,8 +36,48 @@ export default {
   },
   data () {
     return {
-      reportList: []
+      reportList: [],
+      children: [],
+      nowChild: {},
+      childIndex: 0
     }
+  },
+  methods: {
+    toMine () {
+      Megalo.switchTab({ url: '/pages/mine/index' })
+    },
+    getReportList () {
+      this.$request('mini/childRecordList', {
+        params: {
+          studentNo: this.nowChild.studentNo
+        }
+      }).then(res => {
+        if (res.success) {
+          this.reportList = res.data
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    },
+    getChildren () {
+      this.$request('mini/checkBind').then(res => {
+        if (res.success) {
+          this.children = res.data.childList
+          if (this.childIndex === 0) {
+            this.nowChild = this.children[0] || []
+            this.getReportList()
+          }
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    },
+    toReportDetail (val) {
+      Megalo.navigateTo({ url: `/pages/report/personalDetail?studentNo=${val.studentNo}&date=${val.date}` })
+    }
+  },
+  onLoad () {
+    this.getChildren()
   }
 }
 </script>

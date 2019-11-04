@@ -8,7 +8,7 @@
       <div class="username"><open-data type="userNickName"></open-data></div>
     </div>
     <div class="content">
-      <img src="@/native/img/bracelet.png" class="bracelet" />
+      <img src="https://www.edolphin.cn/img/bracelet.png" class="bracelet" />
       <div class="tip">您当前暂未绑定任何手环</div>
       <div class="desc">建议参看手环卡片上的手环ID或二维码，进行设备绑定</div>
       <button class="nostyle btn" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">绑定手环</button>

@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="empty" v-if="list.length === 0">
-      <img src="@/native/img/suggestEmpty.png" class="empty-img" />
+      <img src="https://www.edolphin.cn/img/suggestEmpty.png" class="empty-img" />
       <div class="empty-desc">
         恭喜！该班级所有项目合格率均高于80% <br>
         暂无具体改进方案，强化合格率相对低的项目吧
@@ -32,42 +32,42 @@ export default {
     return {
       obj: {
         1: {
-          iconUrl: 'http://121.41.3.152/img/sg.png',
+          iconUrl: 'https://www.edolphin.cn/img/sg.png',
           name: '身高',
           desc: '注意饮食适当运动',
         },
         2: {
-          iconUrl: 'http://121.41.3.152/img/tz.png',
+          iconUrl: 'https://www.edolphin.cn/img/tz.png',
           name: '体重',
           desc: '注意饮食适当运动',
         },
         3: {
-          iconUrl: 'http://121.41.3.152/img/wfp.png',
+          iconUrl: 'https://www.edolphin.cn/img/wfp.png',
           name: '灵敏性',
           desc: '十米折返跑',
         },
         4: {
-          iconUrl: 'http://121.41.3.152/img/tiao.png',
+          iconUrl: 'https://www.edolphin.cn/img/tiao.png',
           name: '下肢力量',
           desc: '立定跳远',
         },
         5: {
-          iconUrl: 'http://121.41.3.152/img/wq.png',
+          iconUrl: 'https://www.edolphin.cn/img/wq.png',
           name: '上肢力量',
           desc: '网球掷远',
         },
         6: {
-          iconUrl: 'http://121.41.3.152/img/xtx.png',
+          iconUrl: 'https://www.edolphin.cn/img/xtx.png',
           name: '协调性',
           desc: '双脚连续跳',
         },
         7: {
-          iconUrl: 'http://121.41.3.152/img/rrx.png',
+          iconUrl: 'https://www.edolphin.cn/img/rrx.png',
           name: '柔韧性',
           desc: '坐位体前屈',
         },
         8: {
-          iconUrl: 'http://121.41.3.152/img/phm.png',
+          iconUrl: 'https://www.edolphin.cn/img/phm.png',
           name: '平衡力',
           desc: '走平衡木',
         }

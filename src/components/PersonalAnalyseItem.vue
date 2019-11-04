@@ -1,7 +1,7 @@
 <template>
   <div class="personal-anaylse-item">
     <div class="top" @click="heightChange" :class="{'border-b': showInfo}">
-      <img class="icon" src="@/native/img/sg.png" />
+      <img class="icon" src="https://www.edolphin.cn/img/sg.png" />
       <div class="name">身高<text class="desc">（走拼横木）</text></div>
       <div class="average">平均121cm</div>
       <div class="tag">优秀</div>
@@ -19,10 +19,10 @@
             <div class="tp-text">123</div>
           </div>
           <div class="center">
-            <div class="one"><img src="@/native/img/delete.png" class="icon" /></div>
-            <div class="two"><img src="@/native/img/delete.png" class="icon" /></div>
-            <div class="three"><img src="@/native/img/delete.png" class="icon" /></div>
-            <div class="four"><img src="@/native/img/delete.png" class="icon" /></div>
+            <div class="one"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
+            <div class="two"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
+            <div class="three"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
+            <div class="four"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
           </div>
           <div class="btm">
             <div class="btm-text">需努力</div>

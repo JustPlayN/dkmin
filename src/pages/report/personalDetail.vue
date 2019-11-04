@@ -1,6 +1,6 @@
 <template>
   <div class="personal-detail">
-    <chart-circle />
+    <circle :obj="circleData" />
     <div class="nav border-b">
       <div class="nav-item" :class="{'border-b': navStatus === 0}" @click="navStatus = 0">概况分析</div>
       <div class="nav-item" :class="{'border-b': navStatus === 1}" @click="navStatus = 1">单项分析</div>
@@ -21,21 +21,57 @@
 }
 </config>
 <script>
-import ChartCircle from '@/components/ChartCircle'
+import Circle from './components/personal/Circle'
 import TotalAnalyse from './components/personal/TotalAnalyse'
 import SingleAnalyse from './components/personal/SingleAnalyse'
 import Suggestion from './components/personal/Suggestion'
+import dayjs from 'dayjs'
 export default {
   components: {
-    ChartCircle,
+    Circle,
     TotalAnalyse,
     SingleAnalyse,
     Suggestion
   },
   data () {
     return {
-      navStatus: 1
+      navStatus: 1,
+      studentNo: '',
+      date: '',
+      circleData: {}
     }
+  },
+  methods: {
+    childRecordDetail () {
+      this.$request('mini/childRecordDetail', {
+        params: {
+          studentNo: this.studentNo,
+          date: this.date
+        }
+      }).then(res => {
+        if (res.success) {
+          this.circleData = {
+            name: res.data.studentName,
+            age: res.data.age,
+            schoolName: res.data.schoolName,
+            className: res.data.className,
+            date: res.data.date,
+            segmentUrl: res.data.segmentUrl,
+            segment: res.data.segment,
+            percent: res.data.percent,
+            score: res.data.score || 0,
+            preScore: 35,
+          }
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    }
+  },
+  onLoad (opt) {
+    this.date = opt.date ? dayjs(Number(opt.date)).format('YYYY-MM-DD') : '2019-9-26'
+    this.studentNo = opt.studentNo || '10001'
+    this.childRecordDetail()
   }
 }
 </script>

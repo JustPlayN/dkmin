@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <img class="logo" src="http://121.41.3.152/img/logo.png" />
+    <img class="logo" src="https://www.edolphin.cn/img/logo.png" />
     <div class="main">
       <div class="title">享智云</div>
       <div class="text marginTop">少年强则国强！</div>
@@ -90,7 +90,7 @@ export default {
   height: 100vh;
   position: relative;
   padding: 176rpx 32rpx;
-  background: url(http://121.41.3.152/img/bg.png) top /contain no-repeat;
+  background: url(https://www.edolphin.cn/img/bg.png) top /contain no-repeat;
   .logo {
     position: absolute;
     top: 96rpx;

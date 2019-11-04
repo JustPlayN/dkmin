@@ -1,5 +1,5 @@
 <template>
-  <div class="report-item">
+  <div class="report-item" @click="click">
     <div class="score" :class="{error: obj.score < 20}">{{obj.score}}分</div>
     <div class="left">{{obj.studentName}}</div>
     <div class="center">
@@ -25,6 +25,11 @@
 export default {
   props: {
     obj: Object
+  },
+  methods: {
+    click () {
+      this.$emit('click')
+    }
   }
 }
 </script>

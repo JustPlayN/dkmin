@@ -5,7 +5,7 @@
     </div>
     <div class="desc">本班身高平均得分3.5分，体重平均得分4, 本班身高平均得分3.5分，体重平均得分4</div>
     <div class="tips">
-      <img src="@/native/img/tips.png" class="tips-icon" />
+      <img src="https://www.edolphin.cn/img/tips.png" class="tips-icon" />
       <div class="tips-text">本班幼儿上肢力量、协调性发展弱于全园平均,本班幼儿上肢力量、协调性发展弱于全园平均</div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="bracelet-list">
     <div class="bracelet-item">
-      <img class="bind-img" src="@/native/img/braceletbind.png" />
+      <img class="bind-img" src="https://www.edolphin.cn/img/braceletbind.png" />
       <div class="bind-info">
         <text class="name">李俊宇</text>
         <div class="code">ABDHM98078YHBF</div>

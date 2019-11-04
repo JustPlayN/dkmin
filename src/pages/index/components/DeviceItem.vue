@@ -1,12 +1,12 @@
 <template>
   <div class="device-card">
-    <img src="@/native/img/qmark.png" @click="showModal" class="q-icon" />
+    <img src="https://www.edolphin.cn/img/qmark.png" @click="showModal" class="q-icon" />
     <img :src="obj.img" class="device-icon" />
     <div class="title">{{obj.deviceRange}}</div>
     <div class="desc">身体维度：{{obj.measureDimension}}</div>
     <div class="text">测量仪器：{{obj.deviceType}}</div>
     <div class="bottom">
-      <img src="@/native/img/wifi.png" class="wifi" />
+      <img src="https://www.edolphin.cn/img/wifi.png" class="wifi" />
       <div class="btn" @click="toClassList">查看记录</div>
     </div>
   </div>

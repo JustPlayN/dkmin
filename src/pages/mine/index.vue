@@ -45,7 +45,7 @@ export default {
 .index {
   min-height: 100vh;
   padding: 176rpx 0 60rpx;
-  background: url(http://121.41.3.152/img/bg.png) top /contain no-repeat;
+  background: url(https://www.edolphin.cn/img/bg.png) top /contain no-repeat;
 }
 .user-info {
   position: relative;

@@ -1,7 +1,7 @@
 <template>
   <div class="personal">
     <div class="item" @click="toPassword">
-      <img src="@/native/img/pwd.png" class="item-icon" />
+      <img src="https://www.edolphin.cn/img/pwd.png" class="item-icon" />
       <div class="name">修改密码</div>
       <text class="iconfont iconright" />
     </div>

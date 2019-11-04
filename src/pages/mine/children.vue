@@ -1,7 +1,7 @@
 <template>
   <div class="children">
     <div class="child">
-      <img class="child-icon" src="@/native/img/child.png" />
+      <img class="child-icon" src="https://www.edolphin.cn/img/child.png" />
       <div class="right">
         <div class="name">刘俊宇</div>
         <div class="info">
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="child">
-      <img class="child-icon" src="@/native/img/child.png" />
+      <img class="child-icon" src="https://www.edolphin.cn/img/child.png" />
       <div class="right">
         <div class="name">刘俊宇</div>
         <div class="info">
