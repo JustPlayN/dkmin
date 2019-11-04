@@ -83,6 +83,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.history {
+  padding-bottom: 80rpx;
+}
 .user-info {
   display: flex;
   align-items: center;
