@@ -1,38 +1,20 @@
 <template>
   <div class="children">
-    <div class="child">
+    <div class="child" v-for="item in children" :key="item.studentNo">
       <img class="child-icon" src="https://www.edolphin.cn/img/child.png" />
       <div class="right">
-        <div class="name">刘俊宇</div>
+        <div class="name">{{item.studentName}}</div>
         <div class="info">
           <text class="title">年龄：</text>
-          <text class="desc">3.5岁</text>
+          <text class="desc">{{item.age}}岁</text>
         </div>
         <div class="info">
           <text class="title">班级：</text>
-          <text class="desc">小三班</text>
+          <text class="desc">{{item.className}}</text>
         </div>
         <div class="info">
           <text class="title">学号：</text>
-          <text class="desc">30000000</text>
-        </div>
-      </div>
-    </div>
-    <div class="child">
-      <img class="child-icon" src="https://www.edolphin.cn/img/child.png" />
-      <div class="right">
-        <div class="name">刘俊宇</div>
-        <div class="info">
-          <text class="title">年龄：</text>
-          <text class="desc">3.5岁</text>
-        </div>
-        <div class="info">
-          <text class="title">班级：</text>
-          <text class="desc">小三班</text>
-        </div>
-        <div class="info">
-          <text class="title">学号：</text>
-          <text class="desc">30000000</text>
+          <text class="desc">{{item.studentNo}}</text>
         </div>
       </div>
     </div>
@@ -41,6 +23,25 @@
 
 <script>
 export default {
+  data () {
+    return {
+      children: []
+    }
+  },
+  methods: {
+    getChildren () {
+      this.$request('mini/childDetail').then(res => {
+        if (res.success) {
+          this.children = res.data
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    }
+  },
+  onLoad () {
+    this.getChildren()
+  }
 }
 </script>
 

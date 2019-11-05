@@ -27,11 +27,10 @@ export default {
     // pages 的首个页面会被编译成首页
     pages: [
       'pages/login/index',                  // 登录
+      'pages/mine/parent',                  // 我的---家长
       'pages/report/personalDetail',        // 家长--个人详情
-      'pages/bind/type',                    // 绑定方式
       'pages/index/index',                  // 首页
       'pages/report/index',                 // 报告---老师
-      'pages/mine/password',                // 密码
       'pages/report/detail',                // 报告详情
       'pages/score/list',                   // 我的
       'pages/score/edit',                   // 老师修改学生分数

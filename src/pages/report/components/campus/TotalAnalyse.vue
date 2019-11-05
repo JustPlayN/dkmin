@@ -89,18 +89,18 @@ export default {
   font-size: 28rpx;
   line-height: 40rpx;
 }
-.tips {
-  display: flex;
-  margin-top: 32rpx;
-  .tips-icon {
-    height: 40rpx;
-    width: 40rpx;
-    margin-right: 16rpx;
-    flex-shrink: 0;
-  }
-  .tips-text {
-    font-size: 28rpx;
-    line-height: 40rpx;
-  }
-}
+// .tips {
+//   display: flex;
+//   margin-top: 32rpx;
+//   .tips-icon {
+//     height: 40rpx;
+//     width: 40rpx;
+//     margin-right: 16rpx;
+//     flex-shrink: 0;
+//   }
+//   .tips-text {
+//     font-size: 28rpx;
+//     line-height: 40rpx;
+//   }
+// }
 </style>

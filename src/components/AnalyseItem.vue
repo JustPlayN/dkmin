@@ -6,7 +6,10 @@
         {{obj.name}}
         <text class="desc" v-if="obj.desc">（{{obj.desc}}）</text>
       </div>
-      <div class="average">平均{{obj.average}}{{obj.unit}}</div>
+      <div class="average bad" v-if="obj.qualifiedPercent < 60">平均{{obj.average}}{{obj.unit}}</div>
+      <div class="average pass" v-else-if="obj.qualifiedPercent < 70">平均{{obj.average}}{{obj.unit}}</div>
+      <div class="average good" v-else-if="obj.qualifiedPercent < 90">平均{{obj.average}}{{obj.unit}}</div>
+      <div class="average" v-else>{{obj.average}}{{obj.unit}}</div>
       <div class="tag bad" v-if="obj.qualifiedPercent < 60">不合格</div>
       <div class="tag pass" v-else-if="obj.qualifiedPercent < 70">合格</div>
       <div class="tag good" v-else-if="obj.qualifiedPercent < 90">良好</div>
@@ -112,6 +115,15 @@ export default {
       font-size: 28rpx;
       line-height: 40rpx;
       color: #17AFF3;
+      &.good {
+        color: #0DE18C;
+      }
+      &.bad {
+        color: #FF6889;
+      }
+      &.pass {
+        color: rgba(255, 191, 11, 1);
+      }
     }
     .tag {
       display: flex;

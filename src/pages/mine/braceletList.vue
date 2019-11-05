@@ -1,18 +1,40 @@
 <template>
   <div class="bracelet-list">
-    <div class="bracelet-item">
+    <div class="bracelet-item" v-for="item in braceletList" :key="item.handCode">
       <img class="bind-img" src="https://www.edolphin.cn/img/braceletbind.png" />
       <div class="bind-info">
-        <text class="name">李俊宇</text>
-        <div class="code">ABDHM98078YHBF</div>
+        <text class="name">{{item.studentName}}</text>
+        <div class="code">{{item.handCode}}</div>
       </div>
     </div>
-    <div class="btn">新增绑定</div>
+    <div class="btn" @click="openLink">新增绑定</div>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      braceletList: []
+    }
+  },
+  methods: {
+    getBraceletList () {
+      this.$request('mini/handCode/list').then(res => {
+        if (res.success) {
+          this.braceletList = res.data
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
+    },
+    openLink () {
+      Megalo.navigateTo({ url: '/pages/bind/index' })
+    }
+  },
+  onShow () {
+    this.getBraceletList()
+  }
 }
 </script>
 

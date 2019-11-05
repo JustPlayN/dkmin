@@ -141,7 +141,7 @@ export default {
               name: '协调性',
               desc: '双脚连续跳',
               average: res.data.harmony.average,
-              unit: '个',
+              unit: 's',
               elId: 'xtx'
             },
             {
@@ -159,7 +159,7 @@ export default {
               name: '下肢力量',
               desc: '立定跳远',
               average: res.data.lowerLimbStrength.average,
-              unit: 'm',
+              unit: 'cm',
               elId: 'tiao'
             },
             {

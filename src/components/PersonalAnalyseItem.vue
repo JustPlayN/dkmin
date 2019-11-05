@@ -1,28 +1,43 @@
 <template>
   <div class="personal-anaylse-item">
     <div class="top" @click="heightChange" :class="{'border-b': showInfo}">
-      <img class="icon" src="https://www.edolphin.cn/img/sg.png" />
-      <div class="name">身高<text class="desc">（走拼横木）</text></div>
-      <div class="average">平均121cm</div>
-      <div class="tag">优秀</div>
-      <text class="iconfont iconright" />
+      <img class="icon" :src="obj.iconUrl" />
+      <div class="name">
+        {{obj.name}}
+        <text class="desc" v-if="obj.desc">（{{obj.desc}}）</text>
+      </div>
+      <div class="average bad" v-if="obj.segment === '不合格'">{{obj.value}}{{obj.unit}}</div>
+      <div class="average pass" v-else-if="obj.segment === '合格'">{{obj.value}}{{obj.unit}}</div>
+      <div class="average good" v-else-if="obj.segment === '良好'">{{obj.value}}{{obj.unit}}</div>
+      <div class="average" v-else>{{obj.value}}{{obj.unit}}</div>
+      <div class="tag bad" v-if="obj.segment === '不合格'">不合格</div>
+      <div class="tag pass" v-else-if="obj.segment === '合格'">合格</div>
+      <div class="tag good" v-else-if="obj.segment === '良好'">良好</div>
+      <div class="tag" v-else>优秀</div>
+      <text class="iconfont" :class="{'iconjiantou-xia': !showInfo, 'iconjiantou-shang': showInfo}" />
     </div>
     <div class="bottom" :style="{height: `${height}px`}">
-      <div class="content" id="content">
+      <div class="content" :id="obj.elId">
         <div class="tip">
-          全班排名第<text class="red">1</text>名（班级平均<text class="red">110cm</text>）
+          全班排名第<text class="red">{{obj.rank}}</text>名（班级平均<text class="red">{{obj.averageValue}}{{obj.unit}}</text>）
         </div>
         <div class="info">
           <div class="tp">
-            <div class="tp-text">123</div>
-            <div class="tp-text">123</div>
-            <div class="tp-text">123</div>
+            <div class="tp-text" v-for="(r, index) in obj.range" :key="`range${index}`">{{r}}</div>
           </div>
           <div class="center">
-            <div class="one"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
-            <div class="two"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
-            <div class="three"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
-            <div class="four"><img src="https://www.edolphin.cn/img/delete.png" class="icon" /></div>
+            <div class="one">
+              <img v-if="obj.segment === '不合格'" src="https://www.edolphin.cn/img/emojibhg.png" class="icon" />
+              </div>
+            <div class="two">
+              <img v-if="obj.segment === '合格'" src="https://www.edolphin.cn/img/emojihg.png" class="icon" />
+            </div>
+            <div class="three">
+              <img v-if="obj.segment === '良好'" src="https://www.edolphin.cn/img/emojilh.png" class="icon" />
+            </div>
+            <div class="four">
+              <img v-if="obj.segment === '优秀'" src="https://www.edolphin.cn/img/emojiyx.png" class="icon" />
+            </div>
           </div>
           <div class="btm">
             <div class="btm-text">需努力</div>
@@ -31,7 +46,7 @@
             <div class="btm-text">优秀</div>
           </div>
         </div>
-        <div class="desc">反映幼儿上肢和腰腹肌肉力量，是影响幼儿体育活动的重要因素上肢力量良好，将来有成为大力水手的潜质！</div>
+        <div class="desc">{{obj.remark}}</div>
       </div>
     </div>
   </div>
@@ -46,6 +61,9 @@ export default {
       query: null
     }
   },
+  props: {
+    obj: Object
+  },
   methods: {
     heightChange () {
       this.showInfo = !this.showInfo
@@ -57,7 +75,7 @@ export default {
           })
         } else {
           _this.query = Megalo.createSelectorQuery()
-          _this.query.select('#content').boundingClientRect()
+          _this.query.select(`#${this.obj.elId}`).boundingClientRect()
           _this.query.exec(function (res) {
             _this.height = res[0].height
           })
@@ -100,6 +118,15 @@ export default {
       font-size: 28rpx;
       line-height: 40rpx;
       color: #17AFF3;
+      &.good {
+        color: #0DE18C;
+      }
+      &.bad {
+        color: #FF6889;
+      }
+      &.pass {
+        color: rgba(255, 191, 11, 1);
+      }
     }
     .tag {
       display: flex;

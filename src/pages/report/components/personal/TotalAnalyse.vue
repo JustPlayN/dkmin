@@ -3,26 +3,16 @@
     <div class="echart-box">
       <ec-canvas canvas-id="total-analyse" :ec="ec" />
     </div>
-    <div class="desc">本班身高平均得分3.5分，体重平均得分4, 本班身高平均得分3.5分，体重平均得分4</div>
-    <div class="tips">
+    <div class="desc">{{obj.summary}}</div>
+    <!-- <div class="tips">
       <img src="https://www.edolphin.cn/img/tips.png" class="tips-icon" />
       <div class="tips-text">本班幼儿上肢力量、协调性发展弱于全园平均,本班幼儿上肢力量、协调性发展弱于全园平均</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 let analyseOption = {
-  tooltip: {
-    position: ['20', '60'],
-    formatter: (val) => {
-      let arr = ['身高', '灵敏', '柔韧', '下肢', '上肢', '协调', '平衡', '体重']
-      let str = val.data.value.map((item, index) => {
-        return `${arr[index]}平均：${item}`
-      }).join('\n')
-      return `${val.data.name}\n${str}`
-    }
-  },
   legend: {
     x: 'center',
     bottom: 12,
@@ -40,40 +30,46 @@ let analyseOption = {
       }
     },
     indicator: [
-      { name: '身高', max: 65 },
-      { name: '灵敏', max: 16 },
-      { name: '柔韧', max: 30 },
-      { name: '下肢力量', max: 38 },
-      { name: '上肢力量', max: 52 },
-      { name: '协调性', max: 25 },
-      { name: '平衡力', max: 25 },
-      { name: '体重', max: 25 },
+      { name: '身高', max: 5 },
+      { name: '灵敏', max: 5 },
+      { name: '柔韧', max: 5 },
+      { name: '下肢力量', max: 5 },
+      { name: '上肢力量', max: 5 },
+      { name: '协调性', max: 5 },
+      { name: '平衡力', max: 5 },
+      { name: '体重', max: 5 },
     ]
   },
   series: [{
     type: 'radar',
-    data: [
-      {
-        value: [43, 10, 28, 30, 50, 19, 20, 19],
-        name: '班级平均'
-      },
-      {
-        value: [50, 14, 28, 31, 42, 21, 12, 14],
-        name: '园所平均'
-      }
-    ]
+    data: []
   }],
-  color: ['#FF6889', '#31BFFF'],
+  color: ['#31BFFF'],
 }
 
 export default {
+  props: {
+    obj: Object
+  },
   data () {
     return {
+      analyseOption,
       ec: {}
     }
   },
   created () {
-    this.ec.options = analyseOption
+    this.analyseOption.series[0].data = this.obj.data
+    this.analyseOption.tooltip = {
+      position: ['20', '60'],
+      formatter: (val) => {
+        let arr = ['身高', '灵敏', '柔韧', '下肢', '上肢', '协调', '平衡', '体重']
+        let str = val.data.value.map((item, index) => {
+          return `${arr[index]}成绩：${this.obj.grade[index]}`
+        }).join('\n')
+        return `${val.data.name}\n${str}`
+      }
+    }
+    this.ec.options = this.analyseOption
   }
 }
 </script>
@@ -93,18 +89,18 @@ export default {
   font-size: 28rpx;
   line-height: 40rpx;
 }
-.tips {
-  display: flex;
-  margin-top: 32rpx;
-  .tips-icon {
-    height: 40rpx;
-    width: 40rpx;
-    margin-right: 16rpx;
-    flex-shrink: 0;
-  }
-  .tips-text {
-    font-size: 28rpx;
-    line-height: 40rpx;
-  }
-}
+// .tips {
+//   display: flex;
+//   margin-top: 32rpx;
+//   .tips-icon {
+//     height: 40rpx;
+//     width: 40rpx;
+//     margin-right: 16rpx;
+//     flex-shrink: 0;
+//   }
+//   .tips-text {
+//     font-size: 28rpx;
+//     line-height: 40rpx;
+//   }
+// }
 </style>

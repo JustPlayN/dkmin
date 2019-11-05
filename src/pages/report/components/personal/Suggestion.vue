@@ -1,62 +1,23 @@
 <template>
   <div class="suggestion">
     <div class="s-title">强化目标</div>
-    <div class="suggest-item">
-      <img class="icon" src="https://www.edolphin.cn/img/rrx.png" />
+    <div class="suggest-item" v-for="num in list" :key="num">
+      <img class="icon" :src="obj[num].iconUrl" />
       <div class="right">
-        <div class="title">坐位体前屈（柔韧）</div>
-        <div class="tips">相关动作</div>
+        <div class="title">{{obj[num].name}}</div>
+        <div class="tips">相关训练</div>
         <div class="tag-box">
           <div class="tag">
-            <text class="text">策划部</text>
-            <text class="iconfont iconright" />
+            <text class="text">{{obj[num].desc}}</text>
           </div>
         </div>
       </div>
     </div>
-    <div class="suggest-item">
-      <img class="icon" src="https://www.edolphin.cn/img/rrx.png" />
-      <div class="right">
-        <div class="title">坐位体前屈（柔韧）</div>
-        <div class="tips">相关动作</div>
-        <div class="tag-box">
-          <div class="tag">
-            <text class="text">策划部</text>
-            <text class="iconfont iconright" />
-          </div>
-          <div class="tag">
-            <text class="text">原地排球</text>
-            <text class="iconfont iconright" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="suggest-item">
-      <img class="icon" src="https://www.edolphin.cn/img/rrx.png" />
-      <div class="right">
-        <div class="title">坐位体前屈（柔韧）</div>
-        <div class="tips">相关动作</div>
-        <div class="tag-box">
-          <div class="tag">
-            <text class="text">策划部</text>
-            <text class="iconfont iconright" />
-          </div>
-          <div class="tag">
-            <text class="text">双手接球</text>
-            <text class="iconfont iconright" />
-          </div>
-          <div class="tag">
-            <text class="text">原地排球</text>
-            <text class="iconfont iconright" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="empty">
+    <div class="empty" v-if="list.length === 0">
       <img src="https://www.edolphin.cn/img/suggestEmpty.png" class="empty-img" />
       <div class="empty-desc">
-        恭喜！该班级所有项目合格率均高于80% <br>
-        暂无具体改进方案，强化合格率相对低的项目吧
+        恭喜！您的孩子所有项目表现均处于良好/优秀<br>
+        暂无具体改进方案，继续巩固身体锻炼吧
       </div>
     </div>
   </div>
@@ -64,6 +25,55 @@
 
 <script>
 export default {
+  props: {
+    list: Array
+  },
+  data () {
+    return {
+      obj: {
+        1: {
+          iconUrl: 'https://www.edolphin.cn/img/sg.png',
+          name: '身高',
+          desc: '注意饮食适当运动',
+        },
+        2: {
+          iconUrl: 'https://www.edolphin.cn/img/tz.png',
+          name: '体重',
+          desc: '注意饮食适当运动',
+        },
+        3: {
+          iconUrl: 'https://www.edolphin.cn/img/wfp.png',
+          name: '灵敏性',
+          desc: '十米折返跑',
+        },
+        4: {
+          iconUrl: 'https://www.edolphin.cn/img/tiao.png',
+          name: '下肢力量',
+          desc: '立定跳远',
+        },
+        5: {
+          iconUrl: 'https://www.edolphin.cn/img/wq.png',
+          name: '上肢力量',
+          desc: '网球掷远',
+        },
+        6: {
+          iconUrl: 'https://www.edolphin.cn/img/xtx.png',
+          name: '协调性',
+          desc: '双脚连续跳',
+        },
+        7: {
+          iconUrl: 'https://www.edolphin.cn/img/rrx.png',
+          name: '柔韧性',
+          desc: '坐位体前屈',
+        },
+        8: {
+          iconUrl: 'https://www.edolphin.cn/img/phm.png',
+          name: '平衡力',
+          desc: '走平衡木',
+        }
+      }
+    }
+  },
 }
 </script>
 
@@ -107,7 +117,7 @@ export default {
       display: flex;
       align-items: center;
       height: 64rpx;
-      padding: 0 24rpx 0 32rpx;
+      padding: 0 32rpx;
       margin: 24rpx 16rpx 0 0 ;
       background: #31BFFF;
       border-radius: 32rpx;

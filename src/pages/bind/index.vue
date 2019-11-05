@@ -1,92 +1,143 @@
 <template>
-  <div class="index">
-    <div class="tips">
-      <text>通知：10月中旬将上线运动智能方案推荐..</text>
+  <div class="type">
+    <div class="nav fixed-t">
+      <div class="nav-item" :class="{active: navStatus === 0}" @click="navStatus = 0">扫码绑定</div>
+      <div class="nav-item" :class="{active: navStatus === 1}" @click="navStatus = 1">手动添加</div>
     </div>
-    <div class="user-info">
-      <div class="user-img"><open-data type="userAvatarUrl"></open-data></div>
-      <div class="username"><open-data type="userNickName"></open-data></div>
-    </div>
-    <div class="content">
-      <img src="https://www.edolphin.cn/img/bracelet.png" class="bracelet" />
+    <div class="scan" v-if="navStatus === 0">
+      <img src="https://www.edolphin.cn/img/watch.png" class="bracelet" />
       <div class="tip">您当前暂未绑定任何手环</div>
-      <div class="desc">建议参看手环卡片上的手环ID或二维码，进行设备绑定</div>
-      <button class="nostyle btn" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">绑定手环</button>
+      <button class="nostyle btn" open-type="getPhoneNumber">扫一扫</button>
+    </div>
+    <div class="input-box" v-else>
+      <div class="input">
+        <text class="iconfont iconshouhuan" />
+        <input class="code" type="text" v-model="handCode" maxlength="16" placeholder="请输入手环卡片上的16位字符串" />
+      </div>
+      <div class="btn" :class="{disabled: !code}" @click="bindBracelet">确认</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      navStatus: 0,
+      handCode: ''
+    }
+  },
   methods: {
-    getPhoneNumber (val) {
-      console.log(val)
+    bindBracelet () {
+      this.$request('mini/bindCode', {
+        params: {
+          handCode: this.handCode
+        }
+      }).then(res => {
+        if (res.success) {
+          Megalo.showToast({ title: '绑定成功', icon: 'none' })
+        } else {
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+        }
+      })
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-.index {
-  .tips {
+.nav {
+  display: flex;
+  align-items: stretch;
+  height: 96rpx;
+  padding: 0 32rpx;
+  background:#fff;
+  box-shadow: 0 4rpx 24rpx 0 rgba(49,191,255,0.1);
+  .nav-item {
     display: flex;
     align-items: center;
-    height: 72rpx;
-    background: rgba(254, 202, 80, .3);
-    color: #FFA203;
-    font-size: 26rpx;
+    justify-content: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    color: #9197A3;
+    &.active {
+      color: #17AFF3;
+      font-weight: bold;
+      border-bottom: 4rpx solid #31BFFF;
+      border-top: 4rpx solid #fff;
+    }
+  }
+}
+.scan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 270rpx 120rpx 0;
+  .bracelet {
+    width: 346rpx;
+    height: 346rpx;
+  }
+  .tip {
+    margin-top: 60rpx;
+    font-size: 32rpx;
+    line-height: 44rpx;
+    font-weight: bold;
+  }
+  .desc {
+    margin-top: 16rpx;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    color: #9197A3;
+    text-align: center;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 380rpx;
+    height: 88rpx;
+    margin-top: 32rpx;
+    border-radius: 44rpx;
+    background: #31BFFF;
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #fff;
+  }
+}
+.input-box {
+  margin-top: 32rpx;
+  padding-top: 128rpx;
+  .input {
+    display: flex;
+    align-items: center;
+    height: 96rpx;
     padding: 0 32rpx;
-  }
-  .user-info {
-    display: flex;
-    align-items: center;
-    padding: 32rpx;
-    .user-img {
-      height: 64rpx;
-      width: 64rpx;
-      margin-right: 16rpx;
-      border-radius: 32rpx;
-      overflow: hidden;
+    background: #fff;
+    .iconfont {
+      margin-right: 24rpx;
+      font-size: 40rpx;
+      color: #C2C6D1;
     }
-    .username {
-      font-size: 28rpx;
-      line-height: 40rpx;
+    .code {
+      flex-grow: 1;
+      font-size: 32rpx;
     }
   }
-  .content {
+  .btn {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 0 120rpx;
-    .bracelet {
-      width: 346rpx;
-      height: 346rpx;
-    }
-    .tip {
-      margin-top: 60rpx;
-      font-size: 32rpx;
-      line-height: 44rpx;
-      font-weight: bold;
-    }
-    .desc {
-      margin-top: 16rpx;
-      font-size: 28rpx;
-      line-height: 40rpx;
-      color: #9197A3;
-      text-align: center;
-    }
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 380rpx;
-      height: 88rpx;
-      margin-top: 32rpx;
-      border-radius: 44rpx;
-      background: #31BFFF;
-      font-size: 32rpx;
-      font-weight: bold;
-      color: #fff;
+    justify-content: center;
+    margin: 32rpx;
+    height: 88rpx;
+    font-size: 32rpx;
+    font-weight: bold;
+    border-radius: 44rpx;
+    color: #fff;
+    background: #31BFFF;
+    &.disabled {
+      background: rgba(49, 191, 255, .4);
     }
   }
 }

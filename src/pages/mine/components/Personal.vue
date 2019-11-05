@@ -1,18 +1,31 @@
 <template>
   <div class="personal">
-    <div class="item" @click="toPassword">
-      <img src="https://www.edolphin.cn/img/pwd.png" class="item-icon" />
-      <div class="name">修改密码</div>
+    <div class="item" @click="openLink('/pages/mine/braceletList')">
+      <img src="https://www.edolphin.cn/img/shouhuan.png" class="item-icon" />
+      <div class="name">我的手环</div>
+      <div class="desc" v-if="num">{{num}}个</div>
+      <text class="iconfont iconright" />
+    </div>
+    <div class="item" @click="openLink('/pages/mine/children')">
+      <img src="https://www.edolphin.cn/img/baobao.png" class="item-icon" />
+      <div class="name">宝宝信息</div>
       <text class="iconfont iconright" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+  props: {
+    num: Number
+  },
+  computed: {
+    ...mapGetters(['userInfo'])
+  },
   methods: {
-    toPassword () {
-      Megalo.navigateTo({ url: `/pages/mine/password` })
+    openLink (url) {
+      Megalo.navigateTo({ url })
     }
   }
 }
@@ -37,6 +50,11 @@ export default {
     flex-grow: 1;
     font-size: 28rpx;
     line-height: 40rpx;
+  }
+  .desc {
+    font-size: 28rpx;
+    line-height: 40rpx;
+    color: #9197A3;
   }
   .iconfont {
     font-size: 32rpx;
