@@ -1,8 +1,8 @@
 <template>
   <div class="history" :class="{'has-tip': tips}">
-    <div class="tips fixed-t" v-if="tips">
+    <div class="tips fixed-t" v-if="notice">
       <text class="iconfont iconlaba" />
-      <text>通知：10月中旬将上线运动智能方案推荐..</text>
+      <text>通知：{{notice}}</text>
     </div>
     <div class="user-info">
       <div class="user-img"><open-data type="userAvatarUrl"></open-data></div>
@@ -55,7 +55,7 @@ export default {
       children: [],
       nowChild: {},
       childIndex: 0,
-      tips: '10月中旬将上线运动智能方案推荐'
+      notice: ''
     }
   },
   methods: {
@@ -85,7 +85,7 @@ export default {
     getChildren () {
       this.$request('mini/checkBind').then(res => {
         if (res.success) {
-          this.children = res.data.childList
+          this.children = res.data.childList || []
           if (this.childIndex === 0 && this.children.length > 0) {
             this.nowChild = this.children[0] || []
             this.getReportList()
@@ -97,10 +97,25 @@ export default {
     },
     toReportDetail (val) {
       Megalo.navigateTo({ url: `/pages/report/personalDetail?studentNo=${val.studentNo}&date=${val.date}` })
+    },
+    getNotice () {
+      this.$request('message/get', {
+        data: this.$store.getters.userInfo.roleId
+      }).then(res => {
+        if (res.code === '00000') {
+          let time = + new Date()
+          if (time < res.data.endTime && time > res.data.startTime) {
+            this.notice = res.data.content
+          }
+        } else {
+          this.$message({ message: res.msg || '网络异常请稍后重试', type: 'error' })
+        }
+      })
     }
   },
   onLoad () {
     this.getChildren()
+    this.getNotice()
   }
 }
 </script>

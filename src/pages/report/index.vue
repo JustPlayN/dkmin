@@ -8,14 +8,14 @@
       <div class="top-item" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
     </div>
     <div class="main">
-      <report-item v-for="item in reportList.slice(0, showLength)" :key="item.studentNo" :obj="item" />
+      <report-item v-for="item in reportList.slice(0, showLength)" :key="item.studentNo" :obj="item" @click="toReport(item)" />
     </div>
     <div class="btm-btn fixed-b" @click="checkReport" v-if="reportList.length > 0">
       <text class="iconfont iconchange" />
       <div class="text">查看当次班级报告</div>
     </div>
     <div class="empty" v-if="reportList.length === 0">
-      <img src="https://www.edolphin.cn/img/watchgray.png" class="empty-img" />
+      <img src="https://www.edolphin.cn/img/bracelet.png" class="empty-img" />
       <div class="empty-desc">
         {{nowDate}}{{nowClass.name}}<br>
         还未有任何体测信息哦
@@ -58,6 +58,9 @@ export default {
     }
   },
   methods: {
+    toReport (obj) {
+      Megalo.navigateTo({ url: `/pages/report/personalDetail?studentNo=${obj.studentNo}&date=${obj.date}` })
+    },
     getNowClass (obj) {
       if (this.classIndex !== obj.index) {
         this.nowClass = obj.value
@@ -68,7 +71,7 @@ export default {
     getNowDate (obj) {
       if (this.dateIndex !== obj.index) {
         this.nowDate = obj.value
-        this.classIndex = obj.index
+        this.dateIndex = obj.index
         this.getReportList()
       }
     },
@@ -194,23 +197,6 @@ export default {
   .iconfont {
     font-size: 40rpx;
     color: #17AFF3;
-  }
-}
-.empty {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 300rpx;
-  .empty-img {
-    width: 160rpx;
-    height: 160rpx;
-  }
-  .empty-desc {
-    margin-top: 32rpx;
-    font-size: 28rpx;
-    line-height: 40rpx;
-    color: #9197A3;
-    text-align: center;
   }
 }
 </style>

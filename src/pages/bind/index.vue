@@ -7,7 +7,7 @@
     <div class="scan" v-if="navStatus === 0">
       <img src="https://www.edolphin.cn/img/watch.png" class="bracelet" />
       <div class="tip">您当前暂未绑定任何手环</div>
-      <button class="nostyle btn" open-type="getPhoneNumber">扫一扫</button>
+      <div class="btn" @click="scanCode">扫一扫</div>
     </div>
     <div class="input-box" v-else>
       <div class="input">
@@ -39,6 +39,11 @@ export default {
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
+      })
+    },
+    scanCode () {
+      Megalo.scanCode().then(res => {
+        console.log(res)
       })
     }
   }

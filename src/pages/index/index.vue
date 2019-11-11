@@ -18,7 +18,7 @@ export default {
   methods: {
     getDeviceList () {
       this.$request('device/attribute/list', {
-        data: {}
+        params: 1
       }).then(res => {
         if (res.code === '00000') {
           this.deviceList = res.data

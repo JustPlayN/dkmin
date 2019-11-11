@@ -6,7 +6,7 @@
     <div class="desc">身体维度：{{obj.measureDimension}}</div>
     <div class="text">测量仪器：{{obj.deviceType}}</div>
     <div class="bottom">
-      <img src="https://www.edolphin.cn/img/wifi.png" class="wifi" />
+      <img src="https://www.edolphin.cn/img/wifi.png" class="wifi" @click.stop="conectWifi" />
       <div class="btn" @click="toClassList">查看记录</div>
     </div>
   </div>
@@ -29,6 +29,9 @@ export default {
     },
     toClassList () {
       Megalo.navigateTo({ url: `/pages/score/list?fieldId=${this.obj.id}` })
+    },
+    conectWifi () {
+      Megalo.navigateTo({ url: `/pages/net/index` })
     }
   }
 }

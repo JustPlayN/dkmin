@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <div class="top fixed-t">
+    <div class="top fixed-t" v-if="classList.length > 0">
       <div class="item-one">
         <div class="item-left" @click="showPickerClass = true">
           <text class="name">{{nowClass.name}}</text>
@@ -20,7 +20,14 @@
         </div>
       </div>
     </div>
-    <score-list :list="recordList" @remove="removeRecord" @modify="modifyRecord" :showLength="showLength" />
+    <div class="empty" v-if="recordList.length === 0">
+      <img src="https://www.edolphin.cn/img/bracelet.png" class="empty-img" />
+      <div class="empty-desc">
+        {{nowDate}}{{nowClass.name}}<br>
+        还未有任何体测信息哦
+      </div>
+    </div>
+    <score-list :list="recordList" v-if="recordList.length" @remove="removeRecord" @modify="modifyRecord" :showLength="showLength" />
     <picker-class v-if="classList.length > 0 && showPickerClass" :list="classList" :index="classIndex"
       @close="showPickerClass = false" @sure="getNowClass" />
     <picker-date v-if="dateList.length > 0 && showPickerDate" :list="dateList" :index="dateIndex"
