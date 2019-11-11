@@ -23,7 +23,7 @@
       <report-item v-for="(item, index) in reportList" :key="index" :obj="item" @click="toReportDetail(item)" />
     </div>
     <div class="empty" v-if="reportList.length === 0 && children.length > 0">
-      <img src="https://www.edolphin.cn/img/watchgray.png" class="empty-img" />
+      <img src="https://www.edolphin.cn/img/bracelet.png" class="empty-img" />
       <div class="empty-desc">
         当前您孩子绑定的手环<br>
         还未产生任何体测数据哦
@@ -108,7 +108,7 @@ export default {
             this.notice = res.data.content
           }
         } else {
-          this.$message({ message: res.msg || '网络异常请稍后重试', type: 'error' })
+          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
       })
     }
@@ -201,23 +201,6 @@ export default {
     }
   }
 }
-.empty {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-top: 300rpx;
-  .empty-img {
-    width: 160rpx;
-    height: 160rpx;
-  }
-  .empty-desc {
-    margin-top: 32rpx;
-    font-size: 28rpx;
-    line-height: 40rpx;
-    color: #9197A3;
-    text-align: center;
-  }
-}
 .content {
   display: flex;
   flex-direction: column;
@@ -225,8 +208,8 @@ export default {
   padding: 0 120rpx;
   margin-top: 100rpx;
   .bracelet {
-    width: 346rpx;
-    height: 346rpx;
+    width: 320rpx;
+    height: 320rpx;
   }
   .tip {
     margin-top: 60rpx;

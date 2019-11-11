@@ -43,7 +43,8 @@ export default {
     },
     scanCode () {
       Megalo.scanCode().then(res => {
-        console.log(res)
+        this.handCode = res.result
+        this.bindBracelet()
       })
     }
   }
