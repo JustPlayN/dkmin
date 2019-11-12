@@ -1,14 +1,17 @@
 <template>
   <div class="suggestion">
     <div class="s-title">强化目标</div>
-    <div class="suggest-item" v-for="num in list" :key="num">
-      <img class="icon" :src="obj[num].iconUrl" />
-      <div class="right">
-        <div class="title">{{obj[num].name}}</div>
-        <div class="tips">相关训练</div>
-        <div class="tag-box">
-          <div class="tag">
-            <text class="text">{{obj[num].desc}}</text>
+    <div v-for="num in list" :key="num">
+      <div class="suggest-item" v-if="obj[num]">
+        <img class="icon" :src="obj[num].iconUrl" />
+        <div class="right">
+          <div class="title">{{obj[num].name}}</div>
+          <div class="tips">相关训练</div>
+          <div class="tag-box">
+            <div class="tag" v-for="(item, index) in obj[num].desc" :key="`tag${index}`">
+              <text class="text">{{item}}</text>
+              <text class="iconfont iconright" />
+            </div>
           </div>
         </div>
       </div>
@@ -31,45 +34,35 @@ export default {
   data () {
     return {
       obj: {
-        1: {
-          iconUrl: 'https://www.edolphin.cn/img/sg.png',
-          name: '身高',
-          desc: '注意饮食适当运动',
-        },
-        2: {
-          iconUrl: 'https://www.edolphin.cn/img/tz.png',
-          name: '体重',
-          desc: '注意饮食适当运动',
-        },
         3: {
           iconUrl: 'https://www.edolphin.cn/img/wfp.png',
-          name: '灵敏性',
-          desc: '十米折返跑',
+          name: '十米折返跑（灵敏性）',
+          desc: ['前滑步', '侧滑步', '原地拍球']
         },
         4: {
           iconUrl: 'https://www.edolphin.cn/img/tiao.png',
-          name: '下肢力量',
-          desc: '立定跳远',
+          name: '立定跳远（下肢力量）',
+          desc: ['单脚跳', '前跨跳', '踢球']
         },
         5: {
           iconUrl: 'https://www.edolphin.cn/img/wq.png',
-          name: '上肢力量',
-          desc: '网球掷远',
+          name: '网球掷远（上肢力量）',
+          desc: ['原地拍球', '双手接球', '地滚球']
         },
         6: {
           iconUrl: 'https://www.edolphin.cn/img/xtx.png',
-          name: '协调性',
-          desc: '双脚连续跳',
+          name: '双脚连续跳（协调性）',
+          desc: ['单脚跳', '前滑步']
         },
         7: {
           iconUrl: 'https://www.edolphin.cn/img/rrx.png',
-          name: '柔韧性',
-          desc: '坐位体前屈',
+          name: '坐位体前屈（柔韧性）',
+          desc: ['侧滑步']
         },
         8: {
           iconUrl: 'https://www.edolphin.cn/img/phm.png',
-          name: '平衡力',
-          desc: '走平衡木',
+          name: '走平衡木（平衡力）',
+          desc: ['单脚跳', '前滑步', '侧滑步']
         }
       }
     }

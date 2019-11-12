@@ -1,11 +1,17 @@
 <template>
-  <div class="index">
-    <div class="top fixed-t">
-      <div class="top-item" @click="showPickerClass = true">
-        <text class="name">{{nowClass.name}}</text>
-        <text class="iconfont iconchange" v-if="classList.length > 1" />
+  <div class="index" :class="{notice: notice}">
+    <div class="top-box fixed-t">
+      <div class="tips" v-if="notice">
+        <text class="iconfont iconlaba" />
+        <text>通知：{{notice}}</text>
       </div>
-      <div class="top-item" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
+      <div class="top">
+        <div class="top-item" @click="showPickerClass = true">
+          <text class="name">{{nowClass.name}}</text>
+          <text class="iconfont iconchange" v-if="classList.length > 1" />
+        </div>
+        <div class="top-item" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
+      </div>
     </div>
     <div class="main">
       <report-item v-for="item in reportList.slice(0, showLength)" :key="item.studentNo" :obj="item" @click="toReport(item)" />
@@ -54,7 +60,8 @@ export default {
       nowDate: '',
       dateIndex: 0,
       canCreateReport: false,
-      showLength: 8
+      showLength: 8,
+      notice: ''
     }
   },
   methods: {
@@ -129,10 +136,25 @@ export default {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
       })
+    },
+    getNotice () {
+      this.$request('message/get', {
+        data: this.$store.getters.userInfo.roleId
+      }).then(res => {
+        if (res.success && res.data) {
+          let time = + new Date()
+          if (time < res.data.endTime && time > res.data.startTime) {
+            this.notice = res.data.content
+          }
+        } else {
+          this.notice = ''
+        }
+      })
     }
   },
-  onLoad () {
+  onShow () {
     this.getDateList()
+    this.getNotice()
   },
   onPullDownRefresh () {
     this.getReportList()
@@ -147,6 +169,26 @@ export default {
 <style lang="less" scoped>
 .index {
   padding-top: 106rpx;
+  &.notice {
+    padding-top: 178rpx;
+  }
+}
+.top-box {
+  background: #fff;
+  box-shadow: 0 4rpx 24rpx 0 rgba(49,191,255, .1);
+}
+.tips {
+  display: flex;
+  align-items: center;
+  height: 72rpx;
+  background: rgba(244, 230, 190, 1);
+  color: #FFA203;
+  font-size: 26rpx;
+  padding: 0 32rpx;
+  .iconfont {
+    margin-right: 16rpx;
+    font-size: 32rpx;
+  }
 }
 .top {
   display: flex;
@@ -154,8 +196,6 @@ export default {
   justify-content: space-between;
   height: 106rpx;
   padding: 0 32rpx;
-  background: #fff;
-  box-shadow: 0 4rpx 24rpx 0 rgba(49,191,255, .1);
   .top-item {
     display: flex;
     align-items: center;

@@ -102,13 +102,13 @@ export default {
       this.$request('message/get', {
         data: this.$store.getters.userInfo.roleId
       }).then(res => {
-        if (res.code === '00000') {
+        if (res.success && res.data) {
           let time = + new Date()
           if (time < res.data.endTime && time > res.data.startTime) {
             this.notice = res.data.content
           }
         } else {
-          Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
+          this.notice = ''
         }
       })
     }

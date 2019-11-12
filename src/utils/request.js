@@ -17,7 +17,7 @@ function Request (url, body = {}) {
       },
       header: {
         'x-requested-with': 'XMLHttpRequest',
-        Cookie: `token=${store.getters.userInfo.token}`
+        Cookie: `token=${store.getters.userInfo.token}; roleId=${store.getters.userInfo.roleId}`
       }
     }).then(res => {
       if ((res.data.code === '-1') && !fitNoLogin) {

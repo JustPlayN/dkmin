@@ -87,7 +87,7 @@ export default {
 .desc {
   margin-top: 40rpx;
   font-size: 28rpx;
-  line-height: 40rpx;
+  line-height: 48rpx;
 }
 // .tips {
 //   display: flex;
