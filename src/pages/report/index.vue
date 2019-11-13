@@ -90,9 +90,11 @@ export default {
         }
       }).then(res => {
         if (res.success) {
-          this.showLength = 8
-          this.canCreateReport = res.data.canCreateReport
-          this.reportList = res.data.list
+          if (res.data) {
+            this.showLength = 8
+            this.canCreateReport = res.data.canCreateReport
+            this.reportList = res.data.list
+          }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
@@ -127,8 +129,8 @@ export default {
     getDateList () {
       this.$request('mini/timeList').then(res => {
         if (res.success) {
-          this.dateList = res.data
-          if (this.dateIndex === 0) {
+          this.dateList = res.data || []
+          if (this.dateIndex === 0 && this.dateList.length > 0) {
             this.nowDate = this.dateList[0].dateTime
           }
           this.getClassList()

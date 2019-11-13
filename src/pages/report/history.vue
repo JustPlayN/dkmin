@@ -14,7 +14,8 @@
     </div>
     <div class="main" v-if="reportList.length && children.length > 0">
       <div class="img-box">
-        <img src="https://www.edolphin.cn/img/girl.png" class="img" />
+        <img src="https://www.edolphin.cn/img/girl.png" v-if="nowChild.sex === 2" class="img" />
+        <img src="https://www.edolphin.cn/img/boy.png" v-else class="img" />
       </div>
       <div class="banner">
         <text class="title">历史记录</text>

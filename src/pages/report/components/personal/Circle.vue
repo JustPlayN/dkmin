@@ -1,6 +1,6 @@
 <template>
   <div class="circle">
-    <div class="name">过客</div>
+    <div class="name">{{obj.name}}</div>
     <div class="msg">
       <div class="left">
         <text class="msg-name">年龄：</text>

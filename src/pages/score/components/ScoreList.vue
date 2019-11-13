@@ -1,12 +1,14 @@
 <template>
   <div class="score-list">
     <div class="title border-b">
+      <div class="point">序号</div>
       <div class="one">姓名</div>
       <div class="score">成绩</div>
       <div class="point">得分</div>
       <div class="operate">操作</div>
     </div>
-    <div class="list-item border-b" v-for="item in list.slice(0, showLength)" :key="item.studentNo">
+    <div class="list-item border-b" v-for="(item, index) in list.slice(0, showLength)" :key="item.studentNo">
+      <div class="score">{{index + 1}}</div>
       <div class="name">{{item.studentName}}</div>
       <div class="grade">{{item.fieldValue}}</div>
       <div class="score">{{item.score}}</div>
@@ -50,10 +52,10 @@ export default {
     width: 200rpx;
   }
   .score {
-    width: 174rpx;
+    width: 160rpx;
   }
   .point {
-    width: 152rpx;
+    width: 90rpx;
   }
 }
 .list-item {
@@ -67,11 +69,11 @@ export default {
     font-weight: bold;
   }
   .grade {
-    width: 174rpx;
+    width: 160rpx;
     font-size: 28rpx;
   }
   .score {
-    width: 152rpx;
+    width: 90rpx;
     font-size: 28rpx;
   }
   .operate {

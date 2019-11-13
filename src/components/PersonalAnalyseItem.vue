@@ -6,11 +6,11 @@
         {{obj.name}}
         <text class="desc" v-if="obj.desc">（{{obj.desc}}）</text>
       </div>
-      <div class="average bad" v-if="obj.segment === '不合格'">{{obj.value}}{{obj.unit}}</div>
+      <div class="average bad" v-if="obj.segment === '需努力'">{{obj.value}}{{obj.unit}}</div>
       <div class="average pass" v-else-if="obj.segment === '合格'">{{obj.value}}{{obj.unit}}</div>
       <div class="average good" v-else-if="obj.segment === '良好'">{{obj.value}}{{obj.unit}}</div>
       <div class="average" v-else>{{obj.value}}{{obj.unit}}</div>
-      <div class="tag bad" v-if="obj.segment === '不合格'">不合格</div>
+      <div class="tag bad" v-if="obj.segment === '需努力'">不合格</div>
       <div class="tag pass" v-else-if="obj.segment === '合格'">合格</div>
       <div class="tag good" v-else-if="obj.segment === '良好'">良好</div>
       <div class="tag" v-else>优秀</div>
@@ -27,7 +27,7 @@
           </div>
           <div class="center">
             <div class="one">
-              <img v-if="obj.segment === '不合格'" src="https://www.edolphin.cn/img/emojibhg.png" class="icon" />
+              <img v-if="obj.segment === '需努力'" src="https://www.edolphin.cn/img/emojibhg.png" class="icon" />
               </div>
             <div class="two">
               <img v-if="obj.segment === '合格'" src="https://www.edolphin.cn/img/emojihg.png" class="icon" />

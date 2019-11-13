@@ -34,7 +34,11 @@
       @close="showPickerDate = false" @sure="getNowDate" />
   </div>
 </template>
-
+<config>
+{
+  enablePullDownRefresh: true
+}
+</config>
 <script>
 import ScoreList from './components/ScoreList'
 import PickerClass from '@/components/PickerClass'
@@ -158,7 +162,13 @@ export default {
   },
   onLoad (option) {
     this.fieldId = option.fieldId
+  },
+  onShow () {
     this.getDateList()
+  },
+  onPullDownRefresh () {
+    this.getDateList()
+    Megalo.stopPullDownRefresh()
   },
   onReachBottom () {
     this.showLength += 8

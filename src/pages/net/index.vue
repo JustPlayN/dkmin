@@ -25,7 +25,7 @@ export default {
   methods: {
     saveImg () {
       Megalo.getImageInfo({
-        src: 'https://www.edolphin.cn/img/bg.png'
+        src: 'https://www.edolphin.cn/img/cnet.jpeg'
       }).then(res => {
         Megalo.saveImageToPhotosAlbum({
           filePath: res.path
@@ -33,19 +33,22 @@ export default {
           Megalo.showToast({ title: '保存成功', icon: 'none' })
         }).catch(() => {
           Megalo.showToast({ title: '保存失败', icon: 'none' })
+          this.getSetting()
         })
+      })
+    },
+    getSetting () {
+      Megalo.getSetting().then(res => {
+        if (res.authSetting['scope.writePhotosAlbum'] === false) {
+          this.saveRight = false
+        } else {
+          this.saveRight = true
+        }
       })
     }
   },
   onShow () {
-    Megalo.getSetting().then(res => {
-      console.log(res)
-      if (res.authSetting['scope.writePhotosAlbum'] === false) {
-        this.saveRight = false
-      } else {
-        this.saveRight = true
-      }
-    })
+    this.getSetting()
   }
 }
 </script>

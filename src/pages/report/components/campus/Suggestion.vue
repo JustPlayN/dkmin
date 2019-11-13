@@ -1,15 +1,15 @@
 <template>
   <div class="suggestion">
     <div class="s-title">强化目标</div>
-    <div v-for="num in list" :key="num">
-      <div class="suggest-item" v-if="obj[num]">
-        <img class="icon" :src="obj[num].iconUrl" />
+    <div v-for="item in list" :key="item.id">
+      <div class="suggest-item" v-if="obj[item.id]">
+        <img class="icon" :src="obj[item.id].iconUrl" />
         <div class="right">
-          <div class="title">{{obj[num].name}}</div>
+          <div class="title">{{obj[item.id].name}}</div>
           <div class="tips">相关训练</div>
           <div class="tag-box">
-            <div class="tag" v-for="(item, index) in obj[num].desc" :key="`tag${index}`">
-              <text class="text">{{item}}</text>
+            <div class="tag" v-for="(tag, index) in obj[item.id].desc" :key="`tag${index}`">
+              <text class="text">{{tag}}</text>
               <text class="iconfont iconright" />
             </div>
           </div>
@@ -19,8 +19,8 @@
     <div class="empty" v-if="list.length === 0">
       <img src="https://www.edolphin.cn/img/suggestEmpty.png" class="empty-img" />
       <div class="empty-desc">
-        恭喜！该班级所有项目合格率均高于80% <br>
-        暂无具体改进方案，强化合格率相对低的项目吧
+        恭喜！您的孩子所有项目表现均处于良好/优秀<br>
+        暂无具体改进方案，继续巩固身体锻炼吧
       </div>
     </div>
   </div>

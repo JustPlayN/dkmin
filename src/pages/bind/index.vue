@@ -36,6 +36,7 @@ export default {
       }).then(res => {
         if (res.success) {
           Megalo.showToast({ title: '绑定成功', icon: 'none' })
+          Megalo.navigateBack()
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
