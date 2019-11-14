@@ -104,9 +104,11 @@ export default {
       this.$request('mini/teacher/classList').then(res => {
         if (res.success) {
           this.classList = res.data
-          this.classIndex = 0
-          this.nowClass = this.classList[0]
-          this.getReportList()
+          if (!this.nowClass.id && this.classList.length > 0) {
+            this.classIndex = 0
+            this.nowClass = this.classList[0]
+            this.getReportList()
+          }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
