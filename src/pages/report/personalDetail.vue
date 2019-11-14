@@ -66,6 +66,25 @@ export default {
             score: res.data.score || 0,
             preScore: res.data.preMeasureRecord ? res.data.preMeasureRecord.score || 0 : 0,
           }
+          if (this.circleData.score <= 20) {
+            this.circleData.deg = this.circleData.score * 45 / 20
+          } else if (this.circleData.score <= 28) {
+            this.circleData.deg = (this.circleData.score - 20) * 45 / 8 + 45
+          } else if (this.circleData.score <= 32) {
+            this.circleData.deg = (this.circleData.score - 28) * 45 / 4 + 90
+          } else {
+            this.circleData.deg = (this.circleData.score - 32) * 45 / 8 + 135
+          }
+          if (this.circleData.preScore <= 20) {
+            this.circleData.preDeg = this.circleData.preScore * 45 / 20
+          } else if (this.circleData.preScore <= 28) {
+            this.circleData.preDeg = (this.circleData.preScore - 20) * 45 / 8 + 45
+          } else if (this.circleData.preScore <= 32) {
+            this.circleData.preDeg = (this.circleData.preScore - 28) * 45 / 4 + 90
+          } else {
+            this.circleData.preDeg = (this.circleData.preScore - 32) * 45 / 8 + 135
+          }
+          this.circleData.preDeg = this.circleData.preDeg - this.circleData.deg
           this.totalAnalyseObj = {
             summary: res.data.remark,
             grade: [

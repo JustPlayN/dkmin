@@ -24,8 +24,8 @@
     <div class="c-box">
       <div class="score">本次{{obj.score}}分</div>
       <div class="pre-score">上次{{obj.preScore}}分</div>
-      <div class="c-one" :style="`transform: rotate(${-225 + 4.5 * obj.score}deg);`">
-        <div class="c-two" :style="`transform: rotate(${4.5 * (obj.preScore - obj.score)}deg);`"></div>
+      <div class="c-one" :style="`transform: rotate(${obj.deg - 45}deg);`">
+        <div class="c-two" :style="`transform: rotate(${obj.preDeg}deg);`"></div>
       </div>
     </div>
     <div class="c-name">总体测试对比扇形图</div>
@@ -100,11 +100,11 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 374rpx;
-      width: 374rpx;
+      height: 370rpx;
+      width: 370rpx;
       border-radius: 50%;
       border: 36rpx solid #31BFFF;
-      border-color: #31BFFF #31BFFF rgba(49, 191, 255, 0.1) rgba(49, 191, 255, 0.1);
+      border-color: rgba(49, 191, 255, 0.1) rgba(49, 191, 255, 0.1) #31BFFF #31BFFF;
       transform: rotate(-225deg);
     }
     .c-two {
@@ -112,7 +112,7 @@ export default {
       width: 290rpx;
       border-radius: 50%;
       border: 36rpx solid #31BFFF;
-      border-color: #E8EBF3 #E8EBF3 rgba(232, 235, 243, 0.3) rgba(232, 235, 243, 0.3);
+      border-color:rgba(232, 235, 243, 0.3) rgba(232, 235, 243, 0.3) #E8EBF3 #E8EBF3 ;
     }
   }
   .c-name {

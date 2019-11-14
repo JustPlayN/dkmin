@@ -114,7 +114,7 @@ export default {
       })
     }
   },
-  onLoad () {
+  onShow () {
     this.getChildren()
     this.getNotice()
   }

@@ -12,9 +12,9 @@
     <div class="input-box" v-else>
       <div class="input">
         <text class="iconfont iconshouhuan" />
-        <input class="code" type="text" v-model="handCode" maxlength="16" placeholder="请输入手环卡片上的16位字符串" />
+        <input class="code" type="text" v-model="handCode" maxlength="16" placeholder="请输入10位手环编号" />
       </div>
-      <div class="btn" :class="{disabled: !code}" @click="bindBracelet">确认</div>
+      <div class="btn" @click="bindBracelet">确认</div>
     </div>
   </div>
 </template>
@@ -143,9 +143,6 @@ export default {
     border-radius: 44rpx;
     color: #fff;
     background: #31BFFF;
-    &.disabled {
-      background: rgba(49, 191, 255, .4);
-    }
   }
 }
 </style>

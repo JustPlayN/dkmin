@@ -121,10 +121,14 @@ export default {
     getClassList () {
       this.$request('mini/teacher/classList').then(res => {
         if (res.success) {
-          this.classList = res.data
-          this.classIndex = 0
-          this.nowClass = this.classList[0]
-          this.getRecordList()
+          if (res.data && res.data.length > 0) {
+            this.classList = res.data
+            if (this.classIndex === 0 && this.classList.length > 0) {
+              this.classIndex = 0
+              this.nowClass = this.classList[0]
+              this.getRecordList()
+            }
+          }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
@@ -151,9 +155,11 @@ export default {
       this.$request('mini/timeList').then(res => {
         if (res.success) {
           this.dateList = res.data
-          this.nowDate = this.dateList[0].dateTime
-          this.dateIndex = 0
-          this.getClassList()
+          if (this.dateIndex === 0 && this.dateList.length > 0) {
+            this.nowDate = this.dateList[0].dateTime
+            this.dateIndex = 0
+            this.getClassList()
+          }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
@@ -162,12 +168,15 @@ export default {
   },
   onLoad (option) {
     this.fieldId = option.fieldId
+    this.getDateList()
   },
   onShow () {
-    this.getDateList()
+    if (this.nowDate && this.nowClass.id) {
+      this.getRecordList()
+    }
   },
   onPullDownRefresh () {
-    this.getDateList()
+    this.getRecordList()
     Megalo.stopPullDownRefresh()
   },
   onReachBottom () {
