@@ -1,5 +1,5 @@
 <template>
-  <div class="history" :class="{'has-tip': tips}">
+  <div class="history" :class="{'has-tip': notice}">
     <div class="tips fixed-t" v-if="notice">
       <text class="iconfont iconlaba" />
       <text>通知：{{notice}}</text>

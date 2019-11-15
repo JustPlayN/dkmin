@@ -88,14 +88,14 @@ export default {
           this.totalAnalyseObj = {
             summary: res.data.remark,
             grade: [
-              `${res.data.heightDto.indicate}cm`,
-              `${res.data.sensitivityDto.indicate}s`,
-              `${res.data.flexDto.indicate}cm`,
-              `${res.data.legStrengthDto.indicate}m`,
-              `${res.data.limbStrengthDto.indicate}cm`,
-              `${res.data.harmonyDto.indicate}s`,
-              `${res.data.balanceDto.indicate}s`,
-              `${res.data.weightDto.indicate}kg`
+              `${res.data.heightDto.value}cm`,
+              `${res.data.sensitivityDto.value}s`,
+              `${res.data.flexDto.value}cm`,
+              `${res.data.legStrengthDto.value}m`,
+              `${res.data.limbStrengthDto.value}cm`,
+              `${res.data.harmonyDto.value}s`,
+              `${res.data.balanceDto.value}s`,
+              `${res.data.weightDto.value}kg`
             ],
             data: [{
               value: [
