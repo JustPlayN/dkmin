@@ -10,6 +10,9 @@
       <total-analyse v-if="navStatus === 0 && totalAnalyseObj" :obj="totalAnalyseObj" />
       <single-analyse v-if="navStatus === 1" :list="singleAnalyseData" />
       <suggestion v-if="navStatus === 2" :list="suggestionData" />
+      <div class="btn-box">
+        <button class="nostyle btn" open-type="share">分享给好友</button>
+      </div>
     </div>
   </div>
 </template>
@@ -243,5 +246,20 @@ export default {
 .item-box {
   min-height: 100vh;
   padding-bottom: 40rpx;
+}
+.btn-box {
+  margin-top: 24rpx;
+  padding: 24rpx 32rpx;
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 88rpx;
+    border-radius: 44rpx;
+    color: #fff;
+    background: #31BFFF;
+    font-size: 32rpx;
+    font-weight: bold;
+  }
 }
 </style>
