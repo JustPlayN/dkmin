@@ -34,7 +34,7 @@ export default {
           handCode: this.handCode
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           Megalo.showToast({ title: '绑定成功', icon: 'none' })
           Megalo.navigateBack()
         } else {

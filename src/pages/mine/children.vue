@@ -31,7 +31,7 @@ export default {
   methods: {
     getChildren () {
       this.$request('mini/childDetail').then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.children = res.data
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })

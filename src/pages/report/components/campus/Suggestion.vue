@@ -1,6 +1,6 @@
 <template>
   <div class="suggestion">
-    <div class="s-title">强化目标</div>
+    <div class="s-title" v-if="hasData">强化目标</div>
     <div v-for="item in list" :key="item.id">
       <div class="suggest-item" v-if="obj[item.id]">
         <img class="icon" :src="obj[item.id].iconUrl" />
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="empty" v-if="list.length === 0">
+    <div class="empty" v-if="!hasData">
       <img src="https://www.edolphin.cn/img/suggestEmpty.png" class="empty-img" />
       <div class="empty-desc">
         恭喜！您的孩子所有项目表现均处于良好/优秀<br>
@@ -67,6 +67,19 @@ export default {
       }
     }
   },
+  computed: {
+    hasData () {
+      let a = false
+      for (let item of this.list) {
+        console.log(item)
+        if (item.id && item.id !== 2 && item.id !== 1) {
+          a = true
+          break
+        }
+      }
+      return a
+    }
+  }
 }
 </script>
 

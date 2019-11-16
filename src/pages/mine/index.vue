@@ -27,7 +27,7 @@ export default {
   methods: {
     getClassList () {
       this.$request('mini/teacher/classList').then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.classList = res.data
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })

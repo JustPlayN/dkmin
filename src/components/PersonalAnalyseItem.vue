@@ -20,6 +20,10 @@
       <div class="content" :id="obj.elId">
         <div class="tip">
           全班排名第<text class="red">{{obj.rank}}</text>名（班级平均<text class="red">{{obj.averageValue}}{{obj.unit}}</text>）
+          <text v-if="obj.incNum">较上次测量</text>
+          <text class="red" v-if="obj.incNum < 0">{{obj.incNum}}{{obj.unit}}</text>
+          <text class="red" v-else-if="obj.incNum > 0">+{{obj.incNum}}{{obj.unit}}</text>
+          <text v-if="obj.incNum === 0">与上次无差异</text>
         </div>
         <div class="info">
           <div class="tp">

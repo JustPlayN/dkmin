@@ -40,14 +40,14 @@ let analyseOption = {
       }
     },
     indicator: [
+      { name: '平衡力(走平衡木)', max: 5 },
+      { name: '灵敏\n(十米折返跑)', max: 5 },
+      { name: '体重', max: 5 },
+      { name: '下肢力量\n(立定跳远)', max: 5 },
+      { name: '上肢力量(网球掷远)', max: 5 },
+      { name: '协调性\n(双脚连续跳)', max: 5 },
       { name: '身高', max: 5 },
-      { name: '灵敏', max: 5 },
-      { name: '柔韧', max: 5 },
-      { name: '下肢力量', max: 5 },
-      { name: '上肢力量', max: 5 },
-      { name: '协调性', max: 5 },
-      { name: '平衡力', max: 5 },
-      { name: '体重', max: 5 }
+      { name: '柔韧\n(坐位体前驱)', max: 5 },
     ]
   },
   series: [{

@@ -90,7 +90,7 @@ export default {
               date: this.nowDate
             }
           }).then(res => {
-            if (res.success) {
+            if (res.code === '00000') {
               Megalo.showToast({ title: '操作成功', icon: 'none' })
               this.getRecordList()
             } else {
@@ -120,7 +120,7 @@ export default {
     },
     getClassList () {
       this.$request('mini/teacher/classList').then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           if (res.data && res.data.length > 0) {
             this.classList = res.data
             if (this.classIndex === 0 && this.classList.length > 0) {
@@ -143,7 +143,7 @@ export default {
           sort: this.sort
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.recordList = res.data.recordList
           this.recordNum = res.data.count || this.recordList.length || 0
         } else {
@@ -153,7 +153,7 @@ export default {
     },
     getDateList () {
       this.$request('mini/timeList').then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.dateList = res.data
           if (this.dateIndex === 0 && this.dateList.length > 0) {
             this.nowDate = this.dateList[0].dateTime

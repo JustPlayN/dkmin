@@ -89,7 +89,7 @@ export default {
           date: this.nowDate
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           if (res.data) {
             this.showLength = 8
             this.canCreateReport = res.data.canCreateReport
@@ -102,7 +102,7 @@ export default {
     },
     getClassList () {
       this.$request('mini/teacher/classList').then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.classList = res.data
           if (!this.nowClass.id && this.classList.length > 0) {
             this.classIndex = 0
@@ -130,7 +130,7 @@ export default {
     },
     getDateList () {
       this.$request('mini/timeList').then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.dateList = res.data || []
           if (this.dateIndex === 0 && this.dateList.length > 0) {
             this.nowDate = this.dateList[0].dateTime
@@ -145,7 +145,7 @@ export default {
       this.$request('message/get', {
         data: this.$store.getters.userInfo.roleId
       }).then(res => {
-        if (res.success && res.data) {
+        if (res.code === '00000' && res.data) {
           let time = + new Date()
           if (time < res.data.endTime && time > res.data.startTime) {
             this.notice = res.data.content

@@ -36,7 +36,9 @@ export default {
     },
     sure () {
       this.cancel()
-      this.$emit('sure', { value: this.list[this.idx].dateTime, index: this.idx })
+      setTimeout(() => {
+        this.$emit('sure', { value: this.list[this.idx].dateTime, index: this.idx })
+      }, 300)
     },
     pickerChange (e) {
       this.idx = e.detail.value[0]

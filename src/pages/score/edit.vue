@@ -27,7 +27,7 @@ export default {
           score: Number(this.score)
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           Megalo.showModal({
             content: '修改成功',
             confirmText: '确定',

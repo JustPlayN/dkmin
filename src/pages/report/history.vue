@@ -76,7 +76,7 @@ export default {
           studentNo: this.nowChild.studentNo
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.reportList = res.data
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
@@ -85,7 +85,7 @@ export default {
     },
     getChildren () {
       this.$request('mini/checkBind').then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.children = res.data.childList || []
           if (this.childIndex === 0 && this.children.length > 0) {
             this.nowChild = this.children[0] || []
@@ -103,7 +103,7 @@ export default {
       this.$request('message/get', {
         data: this.$store.getters.userInfo.roleId
       }).then(res => {
-        if (res.success && res.data) {
+        if (res.code === '00000' && res.data) {
           let time = + new Date()
           if (time < res.data.endTime && time > res.data.startTime) {
             this.notice = res.data.content

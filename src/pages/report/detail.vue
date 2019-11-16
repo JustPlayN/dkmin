@@ -51,7 +51,7 @@ export default {
           date: this.date
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           let goodNum = res.data.goodNum - res.data.excellentNum
           let qualifiedNum = res.data.qualifiedNum - res.data.goodNum
           this.chartCircleObj = {
@@ -70,26 +70,26 @@ export default {
             summary: res.data.summary,
             data: [{
               value: [
-                res.data.classAverageHeight,
+                res.data.classAverageBalance,
                 res.data.classAverageSensitivity,
-                res.data.classAverageFlex,
+                res.data.classAverageWeight,
                 res.data.classAverageLegStrength,
                 res.data.classAverageLimbStrength,
                 res.data.classAverageHarmony,
-                res.data.classAverageBalance,
-                res.data.classAverageWeight
+                res.data.classAverageHeight,
+                res.data.classAverageFlex,
               ],
               name: '班级平均'
             }, {
               value: [
-                res.data.schoolAverageHeight,
+                res.data.schoolAverageBalance,
                 res.data.schoolAverageSensitivity,
-                res.data.schoolAverageFlex,
+                res.data.schoolAverageWeight,
                 res.data.schoolAverageLegStrength,
                 res.data.schoolAverageLimbStrength,
                 res.data.schoolAverageHarmony,
-                res.data.schoolAverageBalance,
-                res.data.schoolAverageWeight
+                res.data.schoolAverageHeight,
+                res.data.schoolAverageFlex,
               ],
               name: '园所平均'
             }]
@@ -106,7 +106,7 @@ export default {
           date: this.date
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.singleAnalyseData = [
             {
               ...res.data.heightDto,
@@ -193,7 +193,7 @@ export default {
           date: this.date
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.suggestionData = res.data
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
@@ -207,6 +207,12 @@ export default {
     this.getReportDate()
     this.getSingleData()
     this.getSuggestionObj()
+  },
+  onShareAppMessage () {
+    return {
+      title: `${this.chartCircleObj.className}近期体测分析报告`,
+      path: `/pages/report/detail?date=${this.date}&classId=${this.classId}`
+    }
   }
 }
 </script>

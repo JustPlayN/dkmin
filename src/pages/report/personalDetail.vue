@@ -52,7 +52,7 @@ export default {
           date: this.date
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.circleData = {
             remark: res.data.remark,
             name: res.data.studentName,
@@ -88,25 +88,25 @@ export default {
           this.totalAnalyseObj = {
             summary: res.data.remark,
             grade: [
-              `${res.data.heightDto.value}cm`,
+              `${res.data.balanceDto.value}s`,
               `${res.data.sensitivityDto.value}s`,
-              `${res.data.flexDto.value}cm`,
+              `${res.data.weightDto.value}kg`,
               `${res.data.legStrengthDto.value}m`,
               `${res.data.limbStrengthDto.value}cm`,
               `${res.data.harmonyDto.value}s`,
-              `${res.data.balanceDto.value}s`,
-              `${res.data.weightDto.value}kg`
+              `${res.data.heightDto.value}cm`,
+              `${res.data.flexDto.value}cm`,
             ],
             data: [{
               value: [
-                res.data.heightDto.score,
+                res.data.balanceDto.score,
                 res.data.sensitivityDto.score,
-                res.data.flexDto.score,
+                res.data.weightDto.score,
                 res.data.legStrengthDto.score,
                 res.data.limbStrengthDto.score,
                 res.data.harmonyDto.score,
-                res.data.balanceDto.score,
-                res.data.weightDto.score
+                res.data.heightDto.score,
+                res.data.flexDto.score,
               ],
               name: '各项成绩图'
             }]
@@ -123,7 +123,7 @@ export default {
           date: this.date
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.singleAnalyseList = [
             {
               ...res.data.heightDto,
@@ -202,7 +202,7 @@ export default {
           date: this.date
         }
       }).then(res => {
-        if (res.success) {
+        if (res.code === '00000') {
           this.suggestionData = res.data
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
@@ -211,11 +211,17 @@ export default {
     }
   },
   onLoad (opt) {
-    this.date = opt.date ? dayjs(Number(opt.date)).format('YYYY-MM-DD') : ''
+    this.date = opt.date ? dayjs(Number(opt.date) || opt.date).format('YYYY-MM-DD') : ''
     this.studentNo = opt.studentNo || ''
     this.childRecordDetail()
     this.getEachValueAnalysis()
     this.getSuggestionObj()
+  },
+  onShareAppMessage () {
+    return {
+      title: `${this.circleData.name}的体测报告`,
+      path: `/pages/report/personalDetail?date=${this.date}&studentNo=${this.studentNo}`
+    }
   }
 }
 </script>
