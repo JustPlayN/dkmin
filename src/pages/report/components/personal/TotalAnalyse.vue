@@ -44,7 +44,7 @@ let analyseOption = {
     type: 'radar',
     data: []
   }],
-  color: ['#31BFFF'],
+  color: ['#FF6889', '#31BFFF'],
 }
 
 export default {
@@ -62,10 +62,18 @@ export default {
     this.analyseOption.tooltip = {
       position: ['20', '60'],
       formatter: (val) => {
+        console.log(val)
         let arr = ['平衡', '灵敏', '体重', '下肢', '上肢', '协调', '身高', '柔韧']
-        let str = val.data.value.map((item, index) => {
-          return `${arr[index]}成绩：${this.obj.grade[index]}`
-        }).join('\n')
+        let str = ''
+        if (val.data.name === '各项成绩图') {
+          str = val.data.value.map((item, index) => {
+            return `${arr[index]}成绩：${this.obj.grade[index]}`
+          }).join('\n')
+        } else {
+          str = val.data.value.map((item, index) => {
+            return `${arr[index]}成绩：${this.obj.preGrade[index]}`
+          }).join('\n')
+        }
         return `${val.data.name}\n${str}`
       }
     }

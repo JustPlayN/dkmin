@@ -88,6 +88,24 @@ export default {
             this.circleData.preDeg = (this.circleData.preScore - 32) * 45 / 8 + 135
           }
           this.circleData.preDeg = this.circleData.preDeg - this.circleData.deg
+          let preRecord = res.data.preMeasureRecord || {
+            balanceScore: 0,
+            flexScore: 0,
+            harmScore: 0,
+            heightScore: 0,
+            legScore: 0,
+            limbScore: 0,
+            senScore: 0,
+            weightScore: 0,
+            balance: 0,
+            flex: 0,
+            harmony: 0,
+            height: 0,
+            legStrength: 0,
+            limbStrength: 0,
+            sensitivity: 0,
+            weight: 0
+          }
           this.totalAnalyseObj = {
             summary: res.data.remark,
             grade: [
@@ -99,6 +117,16 @@ export default {
               `${res.data.harmonyDto.value}s`,
               `${res.data.heightDto.value}cm`,
               `${res.data.flexDto.value}cm`,
+            ],
+            preGrade: [
+              `${preRecord.balance}s`,
+              `${preRecord.sensitivity}s`,
+              `${preRecord.weight}kg`,
+              `${preRecord.legStrength}m`,
+              `${preRecord.limbStrength}cm`,
+              `${preRecord.harmony}s`,
+              `${preRecord.height}cm`,
+              `${preRecord.flex}cm`,
             ],
             data: [{
               value: [
@@ -112,6 +140,18 @@ export default {
                 res.data.flexDto.score,
               ],
               name: '各项成绩图'
+            }, {
+              value: [
+                preRecord.balanceScore,
+                preRecord.senScore,
+                preRecord.weightScore,
+                preRecord.legScore,
+                preRecord.limbScore,
+                preRecord.harmScore,
+                preRecord.heightScore,
+                preRecord.flexScore,
+              ],
+              name: '上次成绩'
             }]
           }
         } else {

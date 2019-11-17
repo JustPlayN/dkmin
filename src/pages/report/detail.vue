@@ -55,18 +55,16 @@ export default {
         }
       }).then(res => {
         if (res.code === '00000') {
-          let goodNum = res.data.goodNum - res.data.excellentNum
-          let qualifiedNum = res.data.qualifiedNum - res.data.goodNum
           this.chartCircleObj = {
             schoolName: res.data.schoolName,
             className: res.data.className,
             testTime: res.data.testTime,
             studentNum: res.data.studentNum,
             data: [
-              { value: res.data.excellentNum, name: '优秀' },
-              { value: goodNum, name: '良好' },
-              { value: qualifiedNum, name: '合格' },
-              { value: res.data.unQualifiedNum, name: '不合格' },
+              { value: res.data.excellentNum || 0, name: '优秀' },
+              { value: res.data.goodNum || 0, name: '良好' },
+              { value: res.data.qualifiedNum || 0, name: '合格' },
+              { value: res.data.unQualifiedNum || 0, name: '不合格' },
             ]
           }
           this.totalAnalyseObj = {
