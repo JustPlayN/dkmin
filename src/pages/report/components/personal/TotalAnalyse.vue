@@ -65,7 +65,7 @@ export default {
         console.log(val)
         let arr = ['平衡', '灵敏', '体重', '下肢', '上肢', '协调', '身高', '柔韧']
         let str = ''
-        if (val.data.name === '各项成绩图') {
+        if (val.data.name === '本次成绩') {
           str = val.data.value.map((item, index) => {
             return `${arr[index]}成绩：${this.obj.grade[index]}`
           }).join('\n')

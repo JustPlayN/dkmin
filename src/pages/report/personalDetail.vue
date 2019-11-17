@@ -139,7 +139,7 @@ export default {
                 res.data.heightDto.score,
                 res.data.flexDto.score,
               ],
-              name: '各项成绩图'
+              name: '本次成绩'
             }, {
               value: [
                 preRecord.balanceScore,
