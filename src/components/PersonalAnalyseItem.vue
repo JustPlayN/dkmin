@@ -25,7 +25,7 @@
           <text class="red" v-else-if="obj.incNum > 0">+{{obj.incNum}}{{obj.unit}}</text>
           <text v-if="obj.incNum === 0">与上次无差异</text>
         </div>
-        <div class="info">
+        <div class="info" v-if="obj.elId !== 'tz'">
           <div class="tp">
             <div class="tp-text" v-for="(r, index) in obj.range" :key="`range${index}`">{{r}}</div>
           </div>
@@ -48,6 +48,35 @@
             <div class="btm-text">合格</div>
             <div class="btm-text">良好</div>
             <div class="btm-text">优秀</div>
+          </div>
+        </div>
+        <div class="info tz-info" v-else>
+          <div class="tp">
+            <div class="tp-text" v-for="(r, index) in obj.range" :key="`range${index}`">{{r}}</div>
+          </div>
+          <div class="center">
+            <div class="one">
+              <img v-if="obj.segment === '需努力'" src="https://www.edolphin.cn/img/emojibhg.png" class="icon" />
+            </div>
+            <div class="two">
+              <img v-if="obj.segment === '合格'" src="https://www.edolphin.cn/img/emojihg.png" class="icon" />
+            </div>
+            <div class="four">
+              <img v-if="obj.segment === '优秀'" src="https://www.edolphin.cn/img/emojiyx.png" class="icon" />
+            </div>
+            <div class="two">
+              <img v-if="obj.segment === '合格'" src="https://www.edolphin.cn/img/emojihg.png" class="icon" />
+            </div>
+            <div class="one">
+              <img v-if="obj.segment === '需努力'" src="https://www.edolphin.cn/img/emojibhg.png" class="icon" />
+            </div>
+          </div>
+          <div class="btm">
+            <div class="btm-text">需努力</div>
+            <div class="btm-text">合格</div>
+            <div class="btm-text">优秀</div>
+            <div class="btm-text">合格</div>
+            <div class="btm-text">需努力</div>
           </div>
         </div>
         <div class="desc">{{obj.remark}}</div>
@@ -121,9 +150,9 @@ export default {
       margin-right: 16rpx;
       font-size: 28rpx;
       line-height: 40rpx;
-      color: #17AFF3;
+      color: #0DE18C;
       &.good {
-        color: #0DE18C;
+        color: #17AFF3;
       }
       &.bad {
         color: #FF6889;
@@ -140,9 +169,9 @@ export default {
       padding: 0 16rpx;
       color: #fff;
       border-radius: 6rpx;
-      background: #38A8FF;
+      background: #0DE18C;
       &.good {
-        background: #0DE18C;
+        background: #38A8FF;
       }
       &.bad {
         background: #FF6889;
@@ -221,6 +250,19 @@ export default {
         .btm-text {
           width: 148rpx;
           text-align: center;
+        }
+      }
+    }
+    .tz-info {
+      .tp {
+        padding: 32rpx 72rpx 28rpx;
+      }
+      .center {
+        .one, .two, .three, .four {
+          width: 120rpx;
+        }
+        .icon {
+          left: 40rpx;
         }
       }
     }

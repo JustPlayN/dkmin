@@ -72,7 +72,7 @@ export default {
       if (this.classIndex !== obj.index) {
         this.nowClass = obj.value
         this.classIndex = obj.index
-        this.getReportList()
+        this.getDateList()
       }
     },
     getNowDate (obj) {
@@ -107,7 +107,7 @@ export default {
           if (!this.nowClass.id && this.classList.length > 0) {
             this.classIndex = 0
             this.nowClass = this.classList[0]
-            this.getReportList()
+            this.getDateList()
           }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
@@ -129,13 +129,28 @@ export default {
       }
     },
     getDateList () {
-      this.$request('mini/timeList').then(res => {
+      this.$request('mini/timeList', {
+        params: this.nowClass.id
+      }).then(res => {
         if (res.code === '00000') {
           this.dateList = res.data || []
-          if (this.dateIndex === 0 && this.dateList.length > 0) {
-            this.nowDate = this.dateList[0].dateTime
+          if (this.dateList.length > 0) {
+            if (this.dateIndex === 0) {
+              this.nowDate = this.dateList[0].dateTime
+            } else {
+              let timeChange = true
+              for (let item of this.dateList) {
+                if (item.dateTime === this.nowDate) {
+                  timeChange = false
+                  break
+                }
+              }
+              if (timeChange) {
+                this.nowDate = this.dateList[0].dateTime
+              }
+            }
+            this.getReportList()
           }
-          this.getClassList()
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
@@ -157,7 +172,7 @@ export default {
     }
   },
   onShow () {
-    this.getDateList()
+    this.getClassList()
     this.getNotice()
   },
   onPullDownRefresh () {

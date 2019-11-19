@@ -114,9 +114,9 @@ export default {
       margin-right: 16rpx;
       font-size: 28rpx;
       line-height: 40rpx;
-      color: #17AFF3;
+      color: #0DE18C;
       &.good {
-        color: #0DE18C;
+        color: #17AFF3;
       }
       &.bad {
         color: #FF6889;
@@ -133,9 +133,9 @@ export default {
       padding: 0 16rpx;
       color: #fff;
       border-radius: 6rpx;
-      background: #38A8FF;
+      background: #0DE18C;
       &.good {
-        background: #0DE18C;
+        background: #38A8FF;
       }
       &.bad {
         background: #FF6889;

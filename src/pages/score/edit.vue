@@ -1,5 +1,9 @@
 <template>
   <div class="edit">
+    <div class="box">
+      <div class="item" @click="positive = !positive"><text class="iconfont" :class="positive ? 'iconcheckmark-circle' : 'iconcircle'" />正数</div>
+      <div class="item" @click="positive = !positive"><text class="iconfont" :class="positive ? 'iconcircle' : 'iconcheckmark-circle'" />负数</div>
+    </div>
     <div class="input-box">
       <input type="digit" class="input" v-model="score" placeholder="请输入孩子成绩" />
     </div>
@@ -14,7 +18,8 @@ export default {
       studentNo: '',
       fieldId: '',
       date: '',
-      score: ''
+      score: '',
+      positive: true
     }
   },
   methods: {
@@ -24,7 +29,7 @@ export default {
           studentNo: this.studentNo,
           fieldId: this.fieldId,
           date: this.date,
-          score: Number(this.score)
+          score: this.positive ? Number(this.score) : - Number(this.score)
         }
       }).then(res => {
         if (res.code === '00000') {
@@ -54,12 +59,25 @@ export default {
 .input-box {
   display: flex;
   align-items: center;
-  margin-top: 24rpx;
   padding: 0 32rpx;
   height: 80rpx;
   background: #fff;
   .input {
     width: 100%;
+  }
+}
+.box {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  .item {
+    display: flex;
+    align-items: center;
+    margin-right: 64rpx;
+    .iconfont {
+      margin-right: 8rpx;
+      color: #31BFFF;
+    }
   }
 }
 .btn {

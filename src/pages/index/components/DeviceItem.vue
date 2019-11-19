@@ -27,7 +27,7 @@ export default {
       })
     },
     toClassList () {
-      Megalo.navigateTo({ url: `/pages/score/list?fieldId=${this.obj.id}` })
+      Megalo.navigateTo({ url: `/pages/score/list?fieldId=${this.obj.id}&title=${this.obj.deviceRange}` })
     }
   }
 }

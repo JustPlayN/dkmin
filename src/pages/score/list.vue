@@ -70,7 +70,7 @@ export default {
     getNowDate (obj) {
       if (this.dateIndex !== obj.index) {
         this.nowDate = obj.value
-        this.classIndex = obj.index
+        this.dateIndex = obj.index
         this.getRecordList()
       }
     },
@@ -109,7 +109,7 @@ export default {
       if (this.classIndex !== obj.index) {
         this.nowClass = obj.value
         this.classIndex = obj.index
-        this.getRecordList()
+        this.getDateList()
       }
     },
     changeSort (val) {
@@ -126,7 +126,7 @@ export default {
             if (this.classIndex === 0 && this.classList.length > 0) {
               this.classIndex = 0
               this.nowClass = this.classList[0]
-              this.getRecordList()
+              this.getDateList()
             }
           }
         } else {
@@ -152,13 +152,27 @@ export default {
       })
     },
     getDateList () {
-      this.$request('mini/timeList').then(res => {
+      this.$request('mini/timeList', {
+        params: this.nowClass.id
+      }).then(res => {
         if (res.code === '00000') {
-          this.dateList = res.data
-          if (this.dateIndex === 0 && this.dateList.length > 0) {
-            this.nowDate = this.dateList[0].dateTime
-            this.dateIndex = 0
-            this.getClassList()
+          this.dateList = res.data || []
+          if (this.dateList.length > 0) {
+            if (this.dateIndex === 0) {
+              this.nowDate = this.dateList[0].dateTime
+            } else {
+              let timeChange = true
+              for (let item of this.dateList) {
+                if (item.dateTime === this.nowDate) {
+                  timeChange = false
+                  break
+                }
+              }
+              if (timeChange) {
+                this.nowDate = this.dateList[0].dateTime
+              }
+            }
+            this.getRecordList()
           }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
@@ -168,7 +182,10 @@ export default {
   },
   onLoad (option) {
     this.fieldId = option.fieldId
-    this.getDateList()
+    Megalo.setNavigationBarTitle({
+      title: decodeURIComponent(option.title) || '享智云'
+    })
+    this.getClassList()
   },
   onShow () {
     if (this.nowDate && this.nowClass.id) {
