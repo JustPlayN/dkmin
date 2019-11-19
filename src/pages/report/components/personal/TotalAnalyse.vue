@@ -3,6 +3,16 @@
     <div class="echart-box">
       <ec-canvas canvas-id="total-analyse" :ec="ec" />
     </div>
+    <div class="score-box">
+      <div class="left">
+        <div class="item">本次成绩</div>
+        <div class="item" v-for="(item, index) in this.obj.grade" :key="`left${index}`">{{arr[index]}}成绩：{{item}}</div>
+      </div>
+      <div class="right">
+        <div class="item">上次成绩</div>
+        <div class="item" v-for="(item, index) in this.obj.preGrade" :key="`left${index}`">{{arr[index]}}成绩：{{item}}</div>
+      </div>
+    </div>
     <div class="desc">{{obj.summary}}</div>
     <!-- <div class="tips">
       <img src="https://www.edolphin.cn/img/tips.png" class="tips-icon" />
@@ -54,29 +64,30 @@ export default {
   data () {
     return {
       analyseOption,
-      ec: {}
+      ec: {},
+      arr: ['平衡', '灵敏', '体重', '下肢', '上肢', '协调', '身高', '柔韧']
     }
   },
   created () {
     this.analyseOption.series[0].data = this.obj.data
-    this.analyseOption.tooltip = {
-      position: ['20', '60'],
-      formatter: (val) => {
-        console.log(val)
-        let arr = ['平衡', '灵敏', '体重', '下肢', '上肢', '协调', '身高', '柔韧']
-        let str = ''
-        if (val.data.name === '本次成绩') {
-          str = val.data.value.map((item, index) => {
-            return `${arr[index]}成绩：${this.obj.grade[index]}`
-          }).join('\n')
-        } else {
-          str = val.data.value.map((item, index) => {
-            return `${arr[index]}成绩：${this.obj.preGrade[index]}`
-          }).join('\n')
-        }
-        return `${val.data.name}\n${str}`
-      }
-    }
+    // this.analyseOption.tooltip = {
+    //   position: ['20', '60'],
+    //   formatter: (val) => {
+    //     console.log(val)
+    //     let arr = ['平衡', '灵敏', '体重', '下肢', '上肢', '协调', '身高', '柔韧']
+    //     let str = ''
+    //     if (val.data.name === '本次成绩') {
+    //       str = val.data.value.map((item, index) => {
+    //         return `${arr[index]}成绩：${this.obj.grade[index]}`
+    //       }).join('\n')
+    //     } else {
+    //       str = val.data.value.map((item, index) => {
+    //         return `${arr[index]}成绩：${this.obj.preGrade[index]}`
+    //       }).join('\n')
+    //     }
+    //     return `${val.data.name}\n${str}`
+    //   }
+    // }
     this.ec.options = this.analyseOption
   }
 }
@@ -96,6 +107,15 @@ export default {
   margin: 40rpx 0 0;
   font-size: 28rpx;
   line-height: 48rpx;
+}
+.score-box {
+  display: flex;
+  align-items: flex-start;
+  line-height: 40rpx;
+  color: #999;
+  .left, .right {
+    width: 50%;
+  }
 }
 // .tips {
 //   display: flex;

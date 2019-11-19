@@ -168,18 +168,18 @@ export default {
       .process {
         height: 32rpx;
         margin-top: 16rpx;
-        background: rgba(59, 131, 165, .3);
+        background: rgba(13, 225, 140, .3);
         border-radius: 16rpx;
         position: relative;
         .processer {
           height: 32rpx;
-          background: #31BFFF;
+          background: rgba(13, 225, 140, 1);
           border-radius: 16rpx;
         }
         &.good {
-          background: rgba(13, 225, 140, .3);
+          background: rgba(59, 131, 165, .3);
           .processer {
-            background: rgba(13, 225, 140, 1);
+            background: #31BFFF;
           }
         }
         &.bad {

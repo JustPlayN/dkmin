@@ -104,9 +104,21 @@ export default {
       this.$request('mini/teacher/classList').then(res => {
         if (res.code === '00000') {
           this.classList = res.data
-          if (!this.nowClass.id && this.classList.length > 0) {
-            this.classIndex = 0
-            this.nowClass = this.classList[0]
+          if (this.classList.length > 0) {
+            if (this.classIndex === 0) {
+              this.nowClass = this.classList[0]
+            } else {
+              let classChange = true
+              for (let item of this.classList) {
+                if (item.classId === this.nowClass.classId) {
+                  classChange = false
+                  break
+                }
+              }
+              if (classChange) {
+                this.nowClass = this.classId[0]
+              }
+            }
             this.getDateList()
           }
         } else {

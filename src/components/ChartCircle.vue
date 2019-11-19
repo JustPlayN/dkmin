@@ -33,7 +33,8 @@ let cirleOption = {
     itemGap: 36,
     itemWidth: 12,
     itemHeight: 12,
-    borderRadius: 6
+    borderRadius: 6,
+    selectedMode: false
   },
   grid: {
     top: 0
@@ -44,7 +45,7 @@ let cirleOption = {
       type: 'pie',
       radius: ['50%', '62%'],
       center: ['50%', '40%'],
-      avoidLabelOverlap: false,
+      // avoidLabelOverlap: false,
       top: 64,
       data: [],
       itemStyle: {

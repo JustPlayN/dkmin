@@ -3,6 +3,16 @@
     <div class="echart-box">
       <ec-canvas canvas-id="total-analyse" :ec="ec" />
     </div>
+    <div class="score-box">
+      <div class="left">
+        <div class="item">班级平均</div>
+        <div class="item" v-for="(item, index) in this.obj.data[0].value" :key="`left${index}`">{{arr[index]}}平均成绩：{{item}}分</div>
+      </div>
+      <div class="right">
+        <div class="item">校园平均</div>
+        <div class="item" v-for="(item, index) in this.obj.data[1].value" :key="`left${index}`">{{arr[index]}}平均成绩：{{item}}分</div>
+      </div>
+    </div>
     <div class="desc">{{obj.summary}}</div>
     <!-- <div class="tips">
       <img src="https://www.edolphin.cn/img/tips.png" class="tips-icon" />
@@ -13,16 +23,16 @@
 
 <script>
 let analyseOption = {
-  tooltip: {
-    position: ['20', '60'],
-    formatter: (val) => {
-      let arr = ['身高', '灵敏', '柔韧', '下肢', '上肢', '协调', '平衡', '体重']
-      let str = val.data.value.map((item, index) => {
-        return `${arr[index]}平均得分：${item}`
-      }).join('\n')
-      return `${val.data.name}\n${str}`
-    }
-  },
+  // tooltip: {
+  //   position: ['20', '60'],
+  //   formatter: (val) => {
+  //     let arr = ['身高', '灵敏', '柔韧', '下肢', '上肢', '协调', '平衡', '体重']
+  //     let str = val.data.value.map((item, index) => {
+  //       return `${arr[index]}平均得分：${item}`
+  //     }).join('\n')
+  //     return `${val.data.name}\n${str}`
+  //   }
+  // },
   legend: {
     x: 'center',
     bottom: 12,
@@ -64,7 +74,8 @@ export default {
   data () {
     return {
       analyseOption,
-      ec: {}
+      ec: {},
+      arr: ['身高', '灵敏', '柔韧', '下肢', '上肢', '协调', '平衡', '体重']
     }
   },
   created () {
@@ -88,6 +99,15 @@ export default {
   margin-top: 40rpx;
   font-size: 28rpx;
   line-height: 48rpx;
+}
+.score-box {
+  display: flex;
+  align-items: flex-start;
+  line-height: 40rpx;
+  color: #999;
+  .left, .right {
+    width: 50%;
+  }
 }
 // .tips {
 //   display: flex;
