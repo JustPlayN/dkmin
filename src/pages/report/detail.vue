@@ -60,12 +60,19 @@ export default {
             className: res.data.className,
             testTime: res.data.testTime,
             studentNum: res.data.studentNum,
-            data: [
-              { value: res.data.excellentNum || 0, name: '优秀' },
-              { value: res.data.goodNum || 0, name: '良好' },
-              { value: res.data.qualifiedNum || 0, name: '合格' },
-              { value: res.data.unQualifiedNum || 0, name: '不合格' },
-            ]
+            data: []
+          }
+          if (res.data.excellentNum > 0) {
+            this.chartCircleObj.data.push({ value: res.data.excellentNum, name: '优秀' },)
+          }
+          if (res.data.goodNum > 0) {
+            this.chartCircleObj.data.push({ value: res.data.goodNum, name: '良好' },)
+          }
+          if (res.data.qualifiedNum > 0) {
+            this.chartCircleObj.data.push({ value: res.data.qualifiedNum, name: '合格' },)
+          }
+          if (res.data.unQualifiedNum > 0) {
+            this.chartCircleObj.data.push({ value: res.data.unQualifiedNum, name: '不合格' },)
           }
           this.totalAnalyseObj = {
             summary: res.data.summary,
