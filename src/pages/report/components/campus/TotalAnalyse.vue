@@ -9,15 +9,17 @@
         <div class="item" v-for="(item, index) in this.obj.data[0].value" :key="`left${index}`">{{arr[index]}}平均成绩：{{item}}分</div>
       </div>
       <div class="right">
-        <div class="item">校园平均</div>
+        <div class="item">园所平均</div>
         <div class="item" v-for="(item, index) in this.obj.data[1].value" :key="`left${index}`">{{arr[index]}}平均成绩：{{item}}分</div>
       </div>
     </div>
-    <div class="desc">{{obj.summary}}</div>
-    <!-- <div class="tips">
-      <img src="https://www.edolphin.cn/img/tips.png" class="tips-icon" />
-      <div class="tips-text">本班幼儿上肢力量、协调性发展弱于全园平均,本班幼儿上肢力量、协调性发展弱于全园平均</div>
-    </div> -->
+    <div class="desc">
+      身体形态（身高/体重）：反映了孩子是否处于与之身高相对应的健康体重范围。<br>
+      爆发力（网球掷远/立定跳远）与柔韧性（坐位体前屈）：用来衡量孩子肌肉骨骼系的整体健康状况。<br>
+      灵敏性（10米折返跑）：反映人体在各种复杂的条件下，快速、准协调地改变身体姿势、运动方向和随机应变的能力，与幼儿的许多运动（活动）密切相关。<br>
+      协调性（双脚连续跳）：协调不同系统、不同部位和不同器官协同配合完成某一动作的能力。与孩子的神经系统发育紧密相关。<br>
+      平衡能力（走平衡木）：衡力维持身体姿势的能力，是人的中枢神经、前庭分析器、本体感受视觉感受器等机能的综合反映。
+    </div>
   </div>
 </template>
 
@@ -96,31 +98,21 @@ export default {
   height: 650rpx;
 }
 .desc {
+  padding: 20rpx;
+  background: #F5F8FF;
+  border-radius: 12rpx;
   margin-top: 40rpx;
-  font-size: 28rpx;
-  line-height: 48rpx;
+  font-size: 20rpx;
+  line-height: 36rpx;
 }
 .score-box {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   line-height: 40rpx;
   color: #999;
   .left, .right {
-    width: 50%;
+    padding: 0 32rpx;
   }
 }
-// .tips {
-//   display: flex;
-//   margin-top: 32rpx;
-//   .tips-icon {
-//     height: 40rpx;
-//     width: 40rpx;
-//     margin-right: 16rpx;
-//     flex-shrink: 0;
-//   }
-//   .tips-text {
-//     font-size: 28rpx;
-//     line-height: 40rpx;
-//   }
-// }
 </style>
