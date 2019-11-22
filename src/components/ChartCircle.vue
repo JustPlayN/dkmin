@@ -43,7 +43,7 @@ let cirleOption = {
   series: [
     {
       type: 'pie',
-      radius: ['50%', '62%'],
+      radius: '62%',
       center: ['50%', '40%'],
       // avoidLabelOverlap: false,
       top: 64,

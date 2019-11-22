@@ -19,8 +19,8 @@ let sgOption = {
     borderRadius: 6,
     formatter: function (name) {
       let arrObj = {
-        man: '男',
-        woman: '女'
+        boy: '男',
+        girl: '女'
       }
       return arrObj[name]
     },
@@ -36,7 +36,7 @@ let sgOption = {
   },
   tooltip: {},
   dataset: {
-    dimensions: ['product', 'man', 'woman'],
+    dimensions: ['product', 'boy', 'girl'],
     source: []
   },
   xAxis: {
@@ -107,16 +107,16 @@ export default {
   created () {
     if (this.obj.name === '身高') {
       this.sgOption.dataset.source = [
-        { product: '偏矮', man: this.obj.dwarfMaleNum, woman: this.obj.dwarfFemaleNum },
-        { product: '中等', man: this.obj.mediumMaleNum, woman: this.obj.mediumFemaleNum },
-        { product: '偏高', man: this.obj.highMaleNum, woman: this.obj.highFemaleNum },
-        { product: '超高', man: this.obj.superHighMaleNum, woman: this.obj.superHighFemaleNum }
+        { product: '偏矮', boy: this.obj.dwarfMaleNum, girl: this.obj.dwarfFemaleNum },
+        { product: '中等', boy: this.obj.mediumMaleNum, girl: this.obj.mediumFemaleNum },
+        { product: '偏高', boy: this.obj.highMaleNum, girl: this.obj.highFemaleNum },
+        { product: '超高', boy: this.obj.superHighMaleNum, girl: this.obj.superHighFemaleNum }
       ]
     } else {
       this.sgOption.dataset.source = [
-        { product: '偏瘦', man: this.obj.thinMaleNum, woman: this.obj.thinFemaleNum },
-        { product: '正常', man: this.obj.normalMaleNum, woman: this.obj.normalFemaleNum },
-        { product: '超重', man: this.obj.overWeightMaleNum, woman: this.obj.overWeightFemaleNum }
+        { product: '偏瘦', boy: this.obj.thinMaleNum, girl: this.obj.thinFemaleNum },
+        { product: '正常', boy: this.obj.normalMaleNum, girl: this.obj.normalFemaleNum },
+        { product: '超重', boy: this.obj.overWeightMaleNum, girl: this.obj.overweightFemaleNum }
       ]
     }
     this.ec.options = sgOption

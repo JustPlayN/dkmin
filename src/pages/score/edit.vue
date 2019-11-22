@@ -1,9 +1,10 @@
 <template>
   <div class="edit">
-    <div class="box">
+    <div class="box" v-if="fieldId === '7'">
       <div class="item" @click="positive = !positive"><text class="iconfont" :class="positive ? 'iconcheckmark-circle' : 'iconcircle'" />正数</div>
       <div class="item" @click="positive = !positive"><text class="iconfont" :class="positive ? 'iconcircle' : 'iconcheckmark-circle'" />负数</div>
     </div>
+    <div class="box" v-else></div>
     <div class="input-box">
       <input type="digit" class="input" v-model="score" placeholder="请输入孩子成绩" />
     </div>
@@ -19,7 +20,7 @@ export default {
       fieldId: '',
       date: '',
       score: '',
-      positive: true
+      positive: true,
     }
   },
   methods: {

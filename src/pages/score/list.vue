@@ -6,7 +6,7 @@
           <text class="name">{{nowClass.name}}</text>
           <text class="iconfont iconchange" v-if="classList.length > 1" />
         </div>
-        <div class="item-right">当前已测：{{recordNum}}条</div>
+        <div class="item-right">当前已测：{{recordNum}}人</div>
       </div>
       <div class="item-two">
         <div class="item-left" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
