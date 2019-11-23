@@ -56,7 +56,7 @@
           </div>
           <div class="center">
             <div class="one">
-              <img v-if="obj.value === '需努力' && obj.value < obj.range[1]" src="https://www.edolphin.cn/img/emojibhg.png" class="icon" />
+              <img v-if="obj.segment === '需努力' && obj.value < obj.range[1]" src="https://www.edolphin.cn/img/emojibhg.png" class="icon" />
             </div>
             <div class="two">
               <img v-if="obj.segment === '合格' && obj.value < obj.range[2]" src="https://www.edolphin.cn/img/emojihg.png" class="icon" />
