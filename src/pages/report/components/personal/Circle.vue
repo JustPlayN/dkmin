@@ -21,6 +21,12 @@
         <text class="msg-desc">{{obj.date | formatDate('YYYY-MM-DD')}}</text>
       </div>
     </div>
+    <div class="msg">
+      <div class="left">
+        <text class="msg-name">性别：</text>
+        <text class="msg-desc">{{obj.sex === 1 ? '男' : '女'}}</text>
+      </div>
+    </div>
     <div class="c-box">
       <div class="score">本次{{obj.score}}分</div>
       <div class="pre-score">上次{{obj.preScore}}分</div>
@@ -112,7 +118,7 @@ export default {
       width: 290rpx;
       border-radius: 50%;
       border: 36rpx solid #31BFFF;
-      border-color:rgba(232, 235, 243, 0.3) rgba(232, 235, 243, 0.3) #E8EBF3 #E8EBF3 ;
+      border-color:rgba(232, 235, 243, 0.3) rgba(232, 235, 243, 0.3) #E8EBF3 #E8EBF3;
     }
   }
   .c-name {

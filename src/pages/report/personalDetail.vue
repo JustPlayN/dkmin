@@ -60,6 +60,7 @@ export default {
             remark: res.data.remark,
             name: res.data.studentName,
             age: res.data.age,
+            sex: res.data.sex,
             schoolName: res.data.schoolName,
             className: res.data.className,
             date: res.data.date,
