@@ -1,6 +1,6 @@
 <template>
   <div class="report-item" @click="click">
-    <div class="score" :class="{error: obj.score < 20}">{{obj.score}}分</div>
+    <div class="score" :class="{bad: obj.level === 1, pass: obj.level === 2, good: obj.level === 3}">{{obj.score}}分</div>
     <div class="left">{{obj.studentName}}</div>
     <div class="center">
       <div class="c-top">
@@ -51,13 +51,21 @@ export default {
     text-align: center;
     font-size: 36rpx;
     line-height: 60rpx;
-    border: 2rpx solid #03D27F;
+    border: 2rpx solid #0DE18C;
     border-radius: 0 24rpx 0 24rpx;
     background: #0DE18C;
     color: #fff;
-    &.error {
+    &.good {
+      border: 2rpx solid #17AFF3;
+      background: #17AFF3;
+    }
+    &.bad {
       border: 2rpx solid #FF3E6D;
       background: #FF6889;
+    }
+    &.pass {
+      border: 2rpx solid rgba(255, 191, 11, 1);
+      background: rgba(255, 191, 11, 1);
     }
   }
   .left {
