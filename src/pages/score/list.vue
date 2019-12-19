@@ -157,7 +157,7 @@ export default {
       }).then(res => {
         if (res.code === '00000') {
           this.recordList = res.data.recordList
-          this.recordNum = res.data.count || this.recordList.length || 0
+          this.recordNum = res.data.count || 0
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
         }
