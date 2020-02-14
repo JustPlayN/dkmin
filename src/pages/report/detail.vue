@@ -116,7 +116,9 @@ export default {
               desc: '',
               average: res.data.heightDto.averageHeight,
               unit: 'cm',
-              elId: 'sg'
+              elId: 'sg',
+              incQualifiedNum: res.data.heightDto.incQualifiedNum,
+              incNum: res.data.heightDto.incNum
             },
             {
               ...res.data.weightDto,
@@ -125,7 +127,9 @@ export default {
               desc: '',
               average: res.data.weightDto.averageWeight,
               unit: 'kg',
-              elId: 'tz'
+              elId: 'tz',
+              incQualifiedNum: res.data.weightDto.incQualifiedNum,
+              incNum: res.data.weightDto.incNum
             },
             {
               ...res.data.balance,
@@ -134,7 +138,9 @@ export default {
               desc: '走平衡木',
               average: res.data.balance.average,
               unit: 's',
-              elId: 'phm'
+              elId: 'phm',
+              incQualifiedNum: res.data.balance.incQualifiedNum,
+              incNum: res.data.balance.incNum
             },
             {
               ...res.data.harmony,
@@ -143,7 +149,9 @@ export default {
               desc: '双脚连续跳',
               average: res.data.harmony.average,
               unit: 's',
-              elId: 'xtx'
+              elId: 'xtx',
+              incQualifiedNum: res.data.harmony.incQualifiedNum,
+              incNum: res.data.harmony.incNum
             },
             {
               ...res.data.upLimbStrength,
@@ -152,7 +160,9 @@ export default {
               desc: '网球掷远',
               average: res.data.upLimbStrength.average,
               unit: 'm',
-              elId: 'wq'
+              elId: 'wq',
+              incQualifiedNum: res.data.upLimbStrength.incQualifiedNum,
+              incNum: res.data.upLimbStrength.incNum
             },
             {
               ...res.data.lowerLimbStrength,
@@ -161,7 +171,9 @@ export default {
               desc: '立定跳远',
               average: res.data.lowerLimbStrength.average,
               unit: 'cm',
-              elId: 'tiao'
+              elId: 'tiao',
+              incQualifiedNum: res.data.lowerLimbStrength.incQualifiedNum,
+              incNum: res.data.lowerLimbStrength.incNum
             },
             {
               ...res.data.flex,
@@ -170,7 +182,9 @@ export default {
               desc: '坐位体前屈',
               average: res.data.flex.average,
               unit: 'cm',
-              elId: 'rrx'
+              elId: 'rrx',
+              incQualifiedNum: res.data.flex.incQualifiedNum,
+              incNum: res.data.flex.incNum
             },
             {
               ...res.data.sensitivity,
@@ -179,7 +193,9 @@ export default {
               desc: '十米折返跑',
               average: res.data.sensitivity.average,
               unit: 's',
-              elId: 'wfp'
+              elId: 'wfp',
+              incQualifiedNum: res.data.sensitivity.incQualifiedNum,
+              incNum: res.data.sensitivity.incNum
             }
           ]
         } else {

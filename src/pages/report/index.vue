@@ -3,7 +3,7 @@
     <div class="top-box fixed-t">
       <div class="tips" v-if="notice">
         <text class="iconfont iconlaba" />
-        <text>通知：{{notice}}</text>
+        <div class="text-box"><div class="text">通知：{{notice}}</div></div>
       </div>
       <div class="top">
         <div class="top-item" @click="showPickerClass = true">
@@ -219,6 +219,13 @@ export default {
   .iconfont {
     margin-right: 16rpx;
     font-size: 32rpx;
+  }
+  .text-box {
+    overflow: hidden;
+    .text {
+      animation: textScroll 7s infinite linear;
+      white-space: nowrap;
+    }
   }
 }
 .top {

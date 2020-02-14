@@ -4,23 +4,45 @@
       <img class="icon" :src="obj.iconUrl" />
       <div class="name">
         {{obj.name}}
-        <text class="desc" v-if="obj.desc">（{{obj.desc}}）</text>
+        <!-- <text class="desc" v-if="obj.desc">（{{obj.desc}}）</text> -->
       </div>
-      <div class="average bad" v-if="obj.level === '需努力'">平均{{obj.average}}{{obj.unit}}</div>
-      <div class="average pass" v-else-if="obj.level === '合格'">平均{{obj.average}}{{obj.unit}}</div>
-      <div class="average good" v-else-if="obj.level === '良好'">平均{{obj.average}}{{obj.unit}}</div>
-      <div class="average" v-else>平均{{obj.average}}{{obj.unit}}</div>
-      <div class="tag bad" v-if="obj.level === '需努力'">不合格</div>
+      <div class="average bad" v-if="obj.level === '需努力'">
+        平均{{obj.average}}{{obj.unit}}
+        <text v-if="obj.incNum > 0">(+{{obj.incNum}}{{obj.unit}})</text>
+        <text v-else-if="obj.incNum < 0">({{obj.incNum}}{{obj.unit}})</text>
+      </div>
+      <div class="average pass" v-else-if="obj.level === '合格'">
+        平均{{obj.average}}{{obj.unit}}
+        <text v-if="obj.incNum > 0">(+{{obj.incNum}}{{obj.unit}})</text>
+        <text v-else-if="obj.incNum < 0">({{obj.incNum}}{{obj.unit}})</text>
+      </div>
+      <div class="average good" v-else-if="obj.level === '良好'">
+        平均{{obj.average}}{{obj.unit}}
+        <text v-if="obj.incNum > 0">(+{{obj.incNum}}{{obj.unit}})</text>
+        <text v-else-if="obj.incNum < 0">({{obj.incNum}}{{obj.unit}})</text>
+      </div>
+      <div class="average" v-else>
+        平均{{obj.average}}{{obj.unit}}
+        <text v-if="obj.incNum > 0">(+{{obj.incNum}}{{obj.unit}})</text>
+        <text v-else-if="obj.incNum < 0">({{obj.incNum}}{{obj.unit}})</text>
+      </div>
+      <!-- <div class="tag bad" v-if="obj.level === '需努力'">不合格</div>
       <div class="tag pass" v-else-if="obj.level === '合格'">合格</div>
       <div class="tag good" v-else-if="obj.level === '良好'">良好</div>
-      <div class="tag" v-else>优秀</div>
+      <div class="tag" v-else>优秀</div> -->
       <text class="iconfont" :class="{'iconjiantou-xia': !showInfo, 'iconjiantou-shang': showInfo}" />
     </div>
     <div class="bottom" :style="{height: `${height}px`}">
       <div class="content" :id="obj.elId">
         <div class="progress-box" v-if="obj.name !== '身高' && obj.name !== '体重'">
           <div class="p-desc">
-            全班合格人数<text class="red">{{obj.qualifiedNum}}人</text>，
+            全班合格人数<text class="red">{{obj.qualifiedNum}}人</text>
+            <text v-if="obj.incQualifiedNum > 0">(较上次</text>
+            <text v-if="obj.incQualifiedNum > 0" class="red">+{{obj.incQualifiedNum}}</text>
+            <text v-if="obj.incQualifiedNum > 0">人)</text>
+            <text v-if="obj.incQualifiedNum < 0">(较上次</text>
+            <text v-if="obj.incQualifiedNum < 0" class="red">{{obj.incQualifiedNum}}</text>
+            <text v-if="obj.incQualifiedNum < 0">人)</text>，
             合格率<text class="red">{{obj.qualifiedPercent}}%</text>
           </div>
           <div class="process bad" v-if="obj.level === '需努力'">
@@ -125,25 +147,25 @@ export default {
         color: rgba(255, 191, 11, 1);
       }
     }
-    .tag {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 32rpx;
-      padding: 0 16rpx;
-      color: #fff;
-      border-radius: 6rpx;
-      background: #0DE18C;
-      &.good {
-        background: #38A8FF;
-      }
-      &.bad {
-        background: #FF6889;
-      }
-      &.pass {
-        background: rgba(255, 191, 11, 1);
-      }
-    }
+    // .tag {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   height: 32rpx;
+    //   padding: 0 16rpx;
+    //   color: #fff;
+    //   border-radius: 6rpx;
+    //   background: #0DE18C;
+    //   &.good {
+    //     background: #38A8FF;
+    //   }
+    //   &.bad {
+    //     background: #FF6889;
+    //   }
+    //   &.pass {
+    //     background: rgba(255, 191, 11, 1);
+    //   }
+    // }
     .iconfont {
       font-size: 24rpx;
       color: #C2C6D1;
