@@ -36,13 +36,9 @@
       <div class="content" :id="obj.elId">
         <div class="progress-box" v-if="obj.name !== '身高' && obj.name !== '体重'">
           <div class="p-desc">
-            全班合格人数<text class="red">{{obj.qualifiedNum}}人</text>
-            <text v-if="obj.incQualifiedNum > 0">(较上次</text>
-            <text v-if="obj.incQualifiedNum > 0" class="red">+{{obj.incQualifiedNum}}</text>
-            <text v-if="obj.incQualifiedNum > 0">人)</text>
-            <text v-if="obj.incQualifiedNum < 0">(较上次</text>
-            <text v-if="obj.incQualifiedNum < 0" class="red">{{obj.incQualifiedNum}}</text>
-            <text v-if="obj.incQualifiedNum < 0">人)</text>，
+            全班合格人数<text class="red">{{obj.qualifiedNum}}人</text>(较上次
+            <text v-if="obj.incQualifiedNum >= 0" class="red">+{{obj.incQualifiedNum}}</text>
+            <text v-if="obj.incQualifiedNum < 0" class="red">{{obj.incQualifiedNum}}</text>人)，
             合格率<text class="red">{{obj.qualifiedPercent}}%</text>
           </div>
           <div class="process bad" v-if="obj.level === '需努力'">

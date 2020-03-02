@@ -2,7 +2,7 @@
   <div class="history" :class="{'has-tip': notice}">
     <div class="tips fixed-t" v-if="notice">
       <text class="iconfont iconlaba" />
-      <text>通知：{{notice}}</text>
+      <div class="text-box"><div class="text">通知：{{notice}}</div></div>
     </div>
     <div class="user-info">
       <div class="user-img"><open-data type="userAvatarUrl"></open-data></div>
@@ -140,6 +140,13 @@ export default {
   .iconfont {
     margin-right: 16rpx;
     font-size: 32rpx;
+  }
+  .text-box {
+    overflow: hidden;
+    .text {
+      animation: textScroll 7s infinite linear;
+      white-space: nowrap;
+    }
   }
 }
 .user-info {
