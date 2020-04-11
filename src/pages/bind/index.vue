@@ -12,7 +12,7 @@
     <div class="input-box" v-else>
       <div class="input">
         <text class="iconfont iconshouhuan" />
-        <input class="code" type="text" v-model="handCode" maxlength="16" placeholder="请输入9位或10位手环编号" />
+        <input class="code" type="text" v-model="handCode" maxlength="16" placeholder="请输入手环编号" />
       </div>
       <div class="btn" @click="bindBracelet">确认</div>
     </div>
@@ -29,17 +29,13 @@ export default {
   },
   methods: {
     bindBracelet () {
-      if (this.handCode.length !== 10 || this.handCode.length !== 11) {
-        Megalo.showToast({ title: '绑定成功', icon: 'none' })
-        return
-      }
       this.$request('mini/bindCode', {
         params: {
           handCode: this.handCode
         }
       }).then(res => {
         if (res.code === '00000') {
-          Megalo.showToast({ title: '请输入9位或10位手环编号', icon: 'none' })
+          Megalo.showToast({ title: '绑定成功', icon: 'none' })
           Megalo.navigateBack()
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })

@@ -164,7 +164,7 @@ export default {
       })
     },
     getDateList () {
-      this.$request('mini/timeList', {
+      this.$request('timeList', {
         params: this.nowClass.id
       }).then(res => {
         if (res.code === '00000') {
