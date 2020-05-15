@@ -10,7 +10,7 @@
           <text class="name">{{nowClass.name}}</text>
           <text class="iconfont iconchange" v-if="classList.length > 1" />
         </div>
-        <div class="top-item" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
+        <div class="top-item" v-if="nowDate" @click="showPickerDate = true">{{nowDate}}<text class="iconfont iconchange" /></div>
       </div>
     </div>
     <div class="main">
@@ -72,6 +72,7 @@ export default {
       if (this.classIndex !== obj.index) {
         this.nowClass = obj.value
         this.classIndex = obj.index
+        this.nowDate = ''
         this.getDateList()
       }
     },
@@ -94,6 +95,10 @@ export default {
             this.showLength = 8
             this.canCreateReport = res.data.canCreateReport
             this.reportList = res.data.list
+          } else {
+            this.showLength = 8
+            this.canCreateReport = false
+            this.reportList = []
           }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })
@@ -162,6 +167,8 @@ export default {
               }
             }
             this.getReportList()
+          } else {
+            this.reportList = []
           }
         } else {
           Megalo.showToast({ title: res.msg || '网路异常请稍后重试QAQ', icon: 'none' })

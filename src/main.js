@@ -26,13 +26,13 @@ export default {
   config: {
     // pages 的首个页面会被编译成首页
     pages: [
+      'pages/report/detail',                // 报告详情
       'pages/login/index',                  // 登录
       'pages/net/index',                    // 网络
       'pages/mine/parent',                  // 我的---家长
       'pages/report/personalDetail',        // 家长--个人详情
       'pages/index/index',                  // 首页
       'pages/report/index',                 // 报告---老师
-      'pages/report/detail',                // 报告详情
       'pages/score/list',                   // 我的
       'pages/score/edit',                   // 老师修改学生分数
       'pages/mine/children',                // 宝宝信息

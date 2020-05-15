@@ -3,7 +3,7 @@
     <div class="picker-box" :class="{'ease-in': showPicker, 'ease-out': !showPicker}">
       <div class="title border-b">
         <text class="sure" @click="cancel">取消</text>
-        <text class="center">班级</text>
+        <text class="center">日期</text>
         <text class="sure" @click="sure">确定</text>
       </div>
       <picker-view class="picker-view" indicator-class="picker-indicator" :value="[index]" @change="pickerChange" >
