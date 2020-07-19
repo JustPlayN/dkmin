@@ -26,8 +26,8 @@ export default {
   config: {
     // pages 的首个页面会被编译成首页
     pages: [
-      'pages/report/detail',                // 报告详情
       'pages/login/index',                  // 登录
+      'pages/report/detail',                // 报告详情
       'pages/net/index',                    // 网络
       'pages/mine/parent',                  // 我的---家长
       'pages/report/personalDetail',        // 家长--个人详情

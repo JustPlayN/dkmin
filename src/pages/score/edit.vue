@@ -6,7 +6,7 @@
     </div>
     <div class="box" v-else></div>
     <div class="input-box">
-      <input type="digit" class="input" v-model="score" placeholder="请输入孩子成绩" />
+      <input type="digit" class="input" v-model="score" :placeholder="placeholderList[fieldId] || '请输入孩子成绩'" />
     </div>
     <div class="btn" @click="modifyRecord">确定修改</div>
   </div>
@@ -21,6 +21,16 @@ export default {
       date: '',
       score: '',
       positive: true,
+      placeholderList: {
+        '1': '请输入成绩，单位厘米。比如：106.6',
+        '4': '请输入成绩，单位厘米。比如：106.6',
+        '7': '请输入成绩，单位厘米。比如：6.6',
+        '5': '请输入成绩，单位米。比如：6.6',
+        '2': '请输入成绩，单位千克。比如：16.6',
+        '8': '请输入成绩，单位秒。比如：6.6',
+        '6': '请输入成绩，单位秒。比如：6.6',
+        '3': '请输入成绩，单位秒。比如：6.6',
+      }
     }
   },
   methods: {
